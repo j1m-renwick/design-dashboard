@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'fontsource-roboto';
+import CharacterCounter from "./widgets/CharacterCounter";
+import StaticDrawer, {drawerWidth} from "./drawer/StaticDrawer";
+import {makeStyles} from "@material-ui/core/styles";
+import {RecoilRoot} from "recoil";
+
+const useStyles = makeStyles((theme) => ({
+    mainContainer: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        backgroundColor: "#2c387e",
+        height: "100vw"
+    }
+}));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const classes = useStyles();
+
+    return (
+        <div className="App">
+            <RecoilRoot>
+                <StaticDrawer/>
+                <div className={classes.mainContainer}>
+                    <CharacterCounter/>
+                </div>
+            </RecoilRoot>
+        </div>
+    );
 }
 
 export default App;
