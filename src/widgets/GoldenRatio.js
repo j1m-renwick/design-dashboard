@@ -20,16 +20,14 @@ export default function GoldenRatio() {
     const [direction, setDirection] = useState("");
     const [isAnimating, setIsAnimating] = useState(false);
 
-    const [circle1Text, setCircle1Text] = useState("");
-    const [circle2Text, setCircle2Text] = useState("");
-    const [circle3Text, setCircle3Text] = useState("");
-    const [circle4Text, setCircle4Text] = useState("");
-    const [circle5Text, setCircle5Text] = useState("");
-    const [circle6Text, setCircle6Text] = useState("");
+    const circleNumber = 6;
+    const [textArray, setTextArray] = useState([]);
 
     useEffect(() => {
         console.log("initialising");
-        setCircle1Text("9.99")
+        let arr = [...textArray];
+        arr[0] = "9.99";
+        setTextArray(arr);
     }, []);
 
     const animate = direction => {
@@ -40,24 +38,20 @@ export default function GoldenRatio() {
     }
 
     const adjustAfterAnimation = () =>  {
-        setIsAnimating(false);
-        switch(direction) {
-            case "right":
-                setCircle6Text(circle5Text);
-                setCircle5Text(circle4Text);
-                setCircle4Text(circle3Text);
-                setCircle3Text(circle2Text);
-                setCircle2Text(circle1Text);
-                setCircle1Text("");
-                break;
-            case "left":
-                setCircle1Text(circle2Text);
-                setCircle2Text(circle3Text);
-                setCircle3Text(circle4Text);
-                setCircle4Text(circle5Text);
-                setCircle5Text(circle6Text);
-                setCircle6Text("");
+        let arr = [...textArray];
+        if (direction === "right") {
+            for (let i = circleNumber - 1; i >= 0; i--) {
+                arr[i] = arr[i - 1];
+            }
+            arr[0] = ""
+        } else if (direction === "left") {
+            for (let i = 0; i < circleNumber; i++) {
+                arr[i] = arr[i + 1];
+            }
+            arr[circleNumber] = "";
         }
+        setTextArray(arr);
+        setIsAnimating(false);
         setDirection(null)
     }
 
@@ -81,12 +75,12 @@ export default function GoldenRatio() {
                              fillOpacity="null" strokeOpacity="null" strokeWidth="2" fill="#6fbf73"/>
                     <ellipse className={clsx("circle-6", direction)} stroke="none" ry="14" rx="14" id="svg_15" cy="215" cx="386.5"
                              fillOpacity="null" strokeOpacity="null" strokeWidth="2" fill="#33ab9f"/>
-                    <text className={clsx("text-circle-1", direction)} x="162.7" y="163.45312" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="35px" fill="white">{circle1Text}</text>
-                    <text className={clsx("text-circle-2", direction)} x="425" y="100.5" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="25px" fill="white">{circle2Text}</text>
-                    <text className={clsx("text-circle-3", direction)} x="463" y="263.45313" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="15px" fill="white">{circle3Text}</text>
-                    <text className={clsx("text-circle-4", direction)} x="362" y="286.5" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="10px" fill="white">{circle4Text}</text>
-                    <text className={clsx("text-circle-5", direction)} x="347.8" y="224.45313" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="10px" fill="white">{circle5Text}</text>
-                    <text className={clsx("text-circle-6", direction)} x="386.5" y="215" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="10px" fill="white">{circle6Text}</text>
+                    <text className={clsx("text-circle-1", direction)} x="162.7" y="163.45312" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="35px" fill="white">{textArray[0]}</text>
+                    <text className={clsx("text-circle-2", direction)} x="425" y="100.5" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="25px" fill="white">{textArray[1]}</text>
+                    <text className={clsx("text-circle-3", direction)} x="463" y="263.45313" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="15px" fill="white">{textArray[2]}</text>
+                    <text className={clsx("text-circle-4", direction)} x="362" y="286.5" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="10px" fill="white">{textArray[3]}</text>
+                    <text className={clsx("text-circle-5", direction)} x="347.8" y="224.45313" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="10px" fill="white">{textArray[4]}</text>
+                    <text className={clsx("text-circle-6", direction)} x="386.5" y="215" textAnchor="middle" alignmentBaseline="middle" fontFamily="Verdana" fontSize="10px" fill="white">{textArray[5]}</text>
                 </g>
             </svg>
             <button onClick={() => animate("left")}>left</button>
