@@ -6,7 +6,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import BubbleChartOutlinedIcon from '@material-ui/icons/BubbleChartOutlined';
 import {makeStyles} from "@material-ui/core/styles";
-import Checkbox from "@material-ui/core/Checkbox";
 import Divider from "@material-ui/core/Divider";
 import CharacterCounterConfig from "./CharacterCounterConfig";
 

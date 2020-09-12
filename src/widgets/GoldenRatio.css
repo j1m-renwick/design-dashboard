@@ -1,0 +1,364 @@
+/*circle animations*/
+
+@keyframes circle-1-fade-in {
+    0% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes circle-1-to-2 {
+    0% {
+        transform: translate(0px, 0px);
+        rx: 161;
+        ry: 161;
+        fill: #ffcd38;
+    }
+    100% {
+        transform: translate(262px, -63px);
+        rx: 99.3;
+        ry: 99.3;
+        fill: #ffef62;
+    }
+}
+
+@keyframes circle-2-to-3 {
+    0% {
+        transform: translate(0px, 0px);
+        rx: 99.3;
+        ry: 99.3;
+        fill: #ffef62;
+    }
+    100% {
+        transform: translate(38px, 163.5px);
+        rx: 61.5;
+        ry: 61.5;
+        fill: #d7e360;
+    }
+}
+
+@keyframes circle-3-to-4 {
+    0% {
+        transform: translate(0px, 0px);
+        rx: 61.5;
+        ry: 61.5;
+        fill: #d7e360;
+    }
+    100% {
+        transform: translate(-101px, 23px);
+        rx: 38;
+        ry: 38;
+        fill: #a2cf6e;
+    }
+}
+
+@keyframes circle-4-to-5 {
+    0% {
+        transform: translate(0px, 0px);
+        rx: 38;
+        ry: 38;
+        fill: #a2cf6e;
+    }
+    100% {
+        transform: translate(-14px, -62px);
+        rx: 22.5;
+        ry: 23;
+        fill: #6fbf73;
+    }
+}
+
+@keyframes circle-5-to-6 {
+    0% {
+        transform: translate(0px, 0px);
+        rx: 22.5;
+        ry: 23;
+        fill: #6fbf73;
+    }
+    100% {
+        transform: translate(39px, -9px);
+        rx: 14;
+        ry: 14;
+        fill: #33ab9f;
+    }
+}
+
+@keyframes circle-6-fade-out {
+    0% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.circle-0.right {
+    animation: 1s ease-out 1 circle-1-fade-in;
+}
+
+.circle-0.left {
+    animation: 1s ease-in 1 reverse circle-1-fade-in;
+}
+
+.circle-1.right {
+    animation: 1s ease-out 1 circle-1-to-2;
+}
+
+.circle-1.left {
+    animation: 1s ease-in 1 reverse circle-1-to-2;
+}
+
+.circle-2.right {
+    animation: 1s ease-out 1 circle-2-to-3;
+}
+
+.circle-2.left {
+    animation: 1s ease-in 1 reverse circle-2-to-3;
+}
+
+.circle-3.right {
+    animation: 1s ease-out 1 circle-3-to-4;
+}
+
+.circle-3.left {
+    animation: 1s ease-in 1 reverse circle-3-to-4;
+}
+
+.circle-4.right {
+    animation: 1s ease-out 1 circle-4-to-5;
+}
+
+.circle-4.left {
+    animation: 1s ease-in 1 reverse circle-4-to-5;
+}
+
+.circle-5.right {
+    animation: 1s ease-out 1 circle-5-to-6;
+}
+
+.circle-5.left {
+    animation: 1s ease-in 1 reverse circle-5-to-6;
+}
+
+.circle-6.right {
+    animation: 1s ease-out 1 circle-6-fade-out;
+}
+
+.circle-6.left {
+    animation: 1s ease-in 1 reverse circle-6-fade-out;
+}
+
+/*text animations*/
+
+/*because the reverse animations are being applied to a different object than the normal animations,
+the offset is incorrect.  So the reverse animations have to be explicitly specified - unless we can
+TODO find a way to apply reverse animation to different element correctly*/
+
+@keyframes text-circle-1-fade {
+    0% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes text-circle-1-to-2 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 35px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(262px, -63px);
+        font-size: 25px;
+    }
+}
+
+@keyframes text-circle-2-to-1 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 25px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(-262px, 63px);
+        font-size: 35px;
+    }
+}
+
+@keyframes text-circle-2-to-3 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 25px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(38px, 163px);
+        font-size: 15px;
+    }
+}
+
+@keyframes text-circle-3-to-2 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 15px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(-38px, -163px);
+        font-size: 25px;
+    }
+}
+
+@keyframes text-circle-3-to-4 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 15px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(-101px, 23px);
+        font-size: 10px;
+    }
+}
+
+@keyframes text-circle-4-to-3 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 10px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(101px, -23px);
+        font-size: 15px;
+    }
+}
+
+@keyframes text-circle-4-to-5 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 10px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(-14px, -62px);
+        font-size: 10px;
+    }
+}
+
+@keyframes text-circle-5-to-4 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 10px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(14px, 62px);
+        font-size: 10px;
+    }
+}
+
+@keyframes text-circle-5-to-6 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 10px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(39px, -9.5px);
+        font-size: 10px;
+    }
+}
+
+@keyframes text-circle-6-to-5 {
+    0% {
+        transform-origin: center;
+        transform: translate(0px, 0px);
+        font-size: 10px;
+    }
+    100% {
+        transform-origin: center;
+        transform: translate(-39px, 9.5px);
+        font-size: 10px;
+    }
+}
+
+@keyframes text-circle-6-fade {
+    0% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.text-circle-1.left {
+    animation: 1s ease-out 1 text-circle-1-fade;
+}
+
+.text-circle-1.right {
+    animation: 1s ease-out 1 text-circle-1-to-2;
+}
+
+.text-circle-2.left {
+    animation: 1s ease-out 1 text-circle-2-to-1;
+}
+
+.text-circle-2.right {
+    animation: 1s ease-out 1 text-circle-2-to-3;
+}
+
+.text-circle-3.left {
+    animation: 1s ease-out 1 text-circle-3-to-2;
+}
+
+.text-circle-3.right {
+    animation: 1s ease-out 1 text-circle-3-to-4;
+}
+
+.text-circle-4.left {
+    animation: 1s ease-out 1 text-circle-4-to-3;
+}
+
+.text-circle-4.right {
+    animation: 1s ease-out 1 text-circle-4-to-5;
+}
+
+.text-circle-5.left {
+    animation: 1s ease-out 1 text-circle-5-to-4;
+}
+
+.text-circle-5.right {
+    animation: 1s ease-out 1 text-circle-5-to-6;
+}
+
+.text-circle-6.left {
+    animation: 1s ease-out 1 text-circle-6-to-5;
+}
+
+.text-circle-6.right {
+    animation: 1s ease-out 1 text-circle-6-fade;
+}

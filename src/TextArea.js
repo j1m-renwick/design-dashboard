@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import {stopOrHighlight as stopOrHighlightAtom} from "./atoms/widgetAtoms";
 import {useRecoilValue} from "recoil/dist";

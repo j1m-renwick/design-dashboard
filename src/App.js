@@ -5,6 +5,7 @@ import CharacterCounter from "./widgets/CharacterCounter";
 import StaticDrawer, {drawerWidth} from "./drawer/StaticDrawer";
 import {makeStyles} from "@material-ui/core/styles";
 import {RecoilRoot} from "recoil";
+import GoldenRatio from "./widgets/GoldenRatio";
 
 const useStyles = makeStyles((theme) => ({
     mainContainer: {
@@ -24,7 +25,8 @@ function App() {
             <RecoilRoot>
                 <StaticDrawer/>
                 <div className={classes.mainContainer}>
-                    <CharacterCounter/>
+                    {/*<CharacterCounter/>*/}
+                    <GoldenRatio/>
                 </div>
             </RecoilRoot>
         </div>
