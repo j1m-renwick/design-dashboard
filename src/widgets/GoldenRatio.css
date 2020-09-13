@@ -99,6 +99,10 @@
     }
 }
 
+.non-selectable {
+    user-select: none
+}
+
 .circle-0.right {
     animation: 1s ease-out 1 circle-1-fade-in;
 }
@@ -154,6 +158,34 @@
 .circle-6.left {
     animation: 1s ease-in 1 reverse circle-6-fade-out;
 }
+
+/*circle selected colouring*/
+
+.circle-1.selected {
+    fill: #ffcd38de;
+}
+
+.circle-2.selected {
+    fill: #ffef62de;
+}
+
+.circle-3.selected {
+    fill: #d7e360de;
+}
+
+.circle-4.selected {
+    fill: #a2cf6ede;
+}
+
+.circle-5.selected {
+    fill: #6fbf73de;
+}
+
+.circle-6.selected {
+    fill: #33ab9fde;
+}
+
+
 
 /*text animations*/
 

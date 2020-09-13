@@ -33,6 +33,8 @@ export default function TextArea({maxCharacters, characterLimitEnabled, cb}) {
                     evt.currentTarget.innerHTML = inLimitText + additionalTextHtml;
                     cb(textContent.length)
                     break;
+                default:
+                    break;
             }
         } else {
             cb(textContent.length)
@@ -59,6 +61,8 @@ export default function TextArea({maxCharacters, characterLimitEnabled, cb}) {
                     let additionalTextHtml = `<mark style="background-color: aquamarine">${textContent.substring(maxCharacters)}</mark>`
                     evt.currentTarget.innerHTML = inLimitText + additionalTextHtml;
                     cb(textContent.length)
+                    break;
+                default:
                     break;
             }
         }

@@ -1,0 +1,20 @@
+<svg width="528" height="328" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+<!--  <rect stroke="#FFF" id="svg_1" height="325" width="525" y="1" x="1" stroke-width="1.5" fill="none"/>-->
+<!--  <line stroke-linecap="null" stroke-linejoin="null" id="svg_3" y2="325" x2="324" y1="0" x1="324" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#FFF" fill="none"/>-->
+<!--  <line stroke-linecap="null" stroke-linejoin="null" id="svg_5" y2="200" x2="525" y1="200" x1="324" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#FFF" fill="none"/>-->
+<!--  <line stroke-linecap="null" stroke-linejoin="null" id="svg_6" y2="325" x2="401" y1="200" x1="401" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#FFF" fill="none"/>-->
+<!--  <line stroke-linecap="null" stroke-linejoin="null" id="svg_7" y2="248" x2="401" y1="248" x1="324" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#FFF" fill="none"/>-->
+<!--  <line stroke-linecap="null" stroke-linejoin="null" id="svg_8" y2="248" x2="372" y1="200" x1="372" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#FFF" fill="none"/>-->
+<!--  <line stroke-linecap="null" stroke-linejoin="null" id="svg_9" y2="230" x2="401" y1="230" x1="372" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#FFF" fill="none"/>-->
+  <ellipse stroke="none" ry="161" rx="161" id="svg_10" cy="163.45312" cx="162.7" fill-opacity="null" stroke-opacity="null" stroke-width="2" fill="#ffcd38"/>
+  <ellipse ry="99.3" rx="99.3" id="svg_11" cy="100.5" cx="425" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="none" fill="#ffef62"/>
+  <ellipse ry="61.5" rx="61.5" id="svg_12" cy="263.45313" cx="463" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="none" fill="#d7e360"/>
+  <ellipse stroke="none" ry="38" rx="38" id="svg_13" cy="286.5" cx="362" fill-opacity="null" stroke-opacity="null" stroke-width="2" fill="#a2cf6e"/>
+  <ellipse stroke="none" ry="23" rx="22.5" id="svg_14" cy="224.45313" cx="347.8" fill-opacity="null" stroke-opacity="null" stroke-width="2" fill="#6fbf73"/>
+  <ellipse stroke="none" ry="14" rx="14" id="svg_15" cy="215" cx="386.5" fill-opacity="null" stroke-opacity="null" stroke-width="2" fill="#33ab9f"/>
+<!--  <line stroke-linecap="null" stroke-linejoin="null" id="svg_16" y2="248.45313" x2="382.5" y1="229.45313" x1="382.5" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#FFF" fill="none"/>-->
+<!--  <line stroke-linecap="null" stroke-linejoin="null" id="svg_17" y2="237.45313" x2="381.5" y1="237.45313" x1="372" fill-opacity="null" stroke-opacity="null" stroke-width="2" stroke="#FFF" fill="none"/>-->
+ </g>
+</svg>
