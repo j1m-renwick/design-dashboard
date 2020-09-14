@@ -9,7 +9,7 @@ import {
     characterLimitEnabled as charLimitEnabledAtom,
     maxCharacters as maxCharsAtom,
     stopOrHighlight as stopOrHighlightAtom
-} from "../atoms/widgetAtoms";
+} from "../atoms/characterCounterAtoms";
 import {useResetRecoilState} from "recoil/dist";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";

@@ -1,14 +1,22 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
 import "./GoldenRatio.css";
 import clsx from "clsx";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 export default function GoldenRatio() {
 
     const classes = makeStyles(theme => ({
         container: {
-            paddingTop: "100px"
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center"
+        },
+        svgContainer: {
+            paddingTop: "50px",
+            paddingBottom: "50px",
         },
         textArea: {
             width: "500px",
@@ -129,7 +137,7 @@ export default function GoldenRatio() {
 
     return (
         <Container className={classes.container}>
-            <svg width="1056" height="656" viewBox="0 0 528 328" xmlns="http://www.w3.org/2000/svg">
+            <svg className={classes.svgContainer} width="1056" height="656" viewBox="0 0 528 328" xmlns="http://www.w3.org/2000/svg">
                 <g>
                     <title>Layer 1</title>
                     <ellipse onAnimationEnd={updateAfterAnimation} className={clsx("circle-0", direction)} stroke="none"
@@ -178,8 +186,10 @@ export default function GoldenRatio() {
                           fill="white">{textArray[5]}</text>
                 </g>
             </svg>
-            <button onClick={() => startAnimation("left")}>left</button>
-            <button onClick={() => startAnimation("right")}>right</button>
+            <div>
+                <ArrowBackIosIcon fontSize="large" style={{color: "white"}} onClick={() => startAnimation("left")}/>
+                <ArrowForwardIosIcon fontSize="large" style={{color: "white"}} onClick={() => startAnimation("right")}/>
+            </div>
         </Container>
     );
 }

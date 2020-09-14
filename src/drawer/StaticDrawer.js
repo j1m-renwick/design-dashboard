@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,6 +8,8 @@ import BubbleChartOutlinedIcon from '@material-ui/icons/BubbleChartOutlined';
 import {makeStyles} from "@material-ui/core/styles";
 import Divider from "@material-ui/core/Divider";
 import CharacterCounterConfig from "./CharacterCounterConfig";
+import {useRecoilState} from "recoil/dist";
+import {selectedWidget} from "../atoms/DrawerAtoms";
 
 export const drawerWidth = 240;
 
@@ -26,9 +28,10 @@ const list = ['Letter Count', 'Golden Ratio'];
 export default function StaticDrawer() {
     const classes = useStyles();
 
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useRecoilState(selectedWidget);
 
     const renderWidgetConfig = () => {
+        // TODO reset atoms of non-selected config sections
         if (selectedItem === "Letter Count") {
             return <CharacterCounterConfig/>
         }

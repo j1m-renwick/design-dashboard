@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
 import {useRecoilValue} from "recoil";
-import {characterLimitEnabled as limitEnabledAtom, maxCharacters as maxCharAtom} from "../atoms/widgetAtoms";
+import {characterLimitEnabled as limitEnabledAtom, maxCharacters as maxCharAtom} from "../atoms/characterCounterAtoms";
 import TextArea from "../TextArea";
 
 export default function CharacterCounter() {
