@@ -10,10 +10,13 @@ export default function TextArea({maxCharacters, characterLimitEnabled, cb}) {
             borderWidth: "thin",
             borderStyle: "solid",
             padding: "10px",
-            minHeight: "50px",
+            minHeight: "500px",
+            maxHeight: "500px",
             minWidth: "70%",
+            maxWidth: "70%",
             background: "white",
-            textAlign: "left"
+            textAlign: "left",
+            overflowY: "auto"
         }
     }))();
 

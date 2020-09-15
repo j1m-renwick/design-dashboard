@@ -17,11 +17,6 @@ export default function GoldenRatio() {
         svgContainer: {
             paddingTop: "50px",
             paddingBottom: "50px",
-        },
-        textArea: {
-            width: "500px",
-            fontFamily: "roboto",
-            fontSize: "medium"
         }
     }))();
 
