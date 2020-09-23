@@ -1,0 +1,16 @@
+<svg width="264" height="420" viewBox="58 65 265 421" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <title>Layer 1</title>
+        <rect stroke="#000" rx="25" id="svg_1" height="419.99999" width="263.99999" y="65.45313" x="58.50001" stroke-width="1.5" fill="#fff"/>
+        <rect rx="7" id="svg_2" height="22" width="210" y="96.45313" x="84.5" stroke-width="0" stroke="#ff0000" fill="#f44336"/>
+        <rect stroke="#ff0000" rx="7" id="svg_3" height="22" width="179" y="137.45313" x="115.5" stroke-width="0" fill="#29b6f6"/>
+        <rect stroke="#ff0000" rx="7" id="svg_4" height="22" width="179" y="179.45313" x="115.5" stroke-width="0" fill="#66bb6a"/>
+        <rect stroke="#ff0000" rx="7" id="svg_5" height="22" width="179" y="219.45313" x="115.5" stroke-width="0" fill="#98ee99"/>
+        <rect rx="7" id="svg_6" height="22" width="210" y="260.45313" x="84.5" stroke-width="0" stroke="#ff0000" fill="#f44336"/>
+        <rect stroke="#ff0000" rx="7" id="svg_7" height="22" width="179" y="301.45313" x="115.5" stroke-width="0" fill="#ff77a9"/>
+        <rect stroke="#ff0000" rx="7" id="svg_8" height="22" width="179" y="417.45313" x="115.5" stroke-width="0" fill="#ff77a9"/>
+        <rect stroke="#ff0000" id="svg_9" height="119" width="179" y="311.45313" x="115.5" stroke-width="0" fill="#ff77a9"/>
+        <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="16" id="svg_12" y="113.45313" x="90.5" stroke-width="0" stroke="#ff0000" fill="#ffffff">DATA</text>
+        <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Arvo, sans-serif" font-size="16" id="svg_13" y="277.45313" x="90.5" stroke-width="0" stroke="#ff0000" fill="#ffffff">SIGNATURE</text>
+    </g>
+</svg>

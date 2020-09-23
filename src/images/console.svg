@@ -1,0 +1,12 @@
+<svg width="800" height="200" viewBox="40 30 735 170" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <path d="M47,35 h720 q5,0 5,5 v22 h-730 v-22 q0,-5 5,-5 z" fill="grey" stroke="#000"/>
+        <rect id="svg_5" height="130" width="730" y="62" x="42" stroke-opacity="null" stroke-width="1.5" stroke="#000"
+              fill="#000"/>
+        <text font-weight="bold" font-family="sans-serif" font-size="14" y="54" x="407" text-anchor="middle" stroke-width="0" stroke="#ff0000"
+              fill="white">Terminal
+        </text>
+        <text font-weight="bold" font-family="monospace" font-size="14" y="85" x="52" fill="#8dd247">root-user:~$</text>
+        <text font-family="monospace" font-size="14" y="85" x="160" fill="white">some text</text>
+    </g>
+</svg>

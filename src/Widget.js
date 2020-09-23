@@ -7,6 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import GoldenRatio from "./widgets/GoldenRatio";
 import {useRecoilValue} from "recoil/dist";
 import {selectedWidget as selectedWidgetAtom} from "./atoms/DrawerAtoms";
+import CertificateVerification from "./widgets/CertificateVerification";
 
 export default function Widget() {
 
@@ -15,7 +16,7 @@ export default function Widget() {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
             backgroundColor: "#2c387e",
-            height: "100vw"
+            height: "100vh"
         }
     }))();
 
@@ -28,6 +29,7 @@ export default function Widget() {
             case "Golden Ratio":
                 return <GoldenRatio/>
             default:
+                return <CertificateVerification/>
         }
     }
 
