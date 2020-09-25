@@ -4,30 +4,53 @@ import './LinuxConsole.css';
 
 export default function LinuxConsole({rawText}) {
 
-    const lineOneRef = useRef();
-    const lineTwoRef = useRef();
-    const [caretEndPositionOne, setCaretEndPositionOne] = useState(0);
-    const [caretEndPositionTwo, setCaretEndPositionTwo] = useState(0);
-    const [clipZoneWidthOne, setClipZoneWidthOne] = useState(0);
-    const [clipZoneWidthTwo, setClipZoneWidthTwo] = useState(0);
+    // TODO refactor this into scalable arrays
+    // TODO display warning if text exceeds display size
+
+    const line1Ref = useRef();
+    const line2Ref = useRef();
+    const line3Ref = useRef();
+    const line4Ref = useRef();
+    const line5Ref = useRef();
+    const [caretEndPosition1, setCaretEndPosition1] = useState(0);
+    const [caretEndPosition2, setCaretEndPosition2] = useState(0);
+    const [caretEndPosition3, setCaretEndPosition3] = useState(0);
+    const [caretEndPosition4, setCaretEndPosition4] = useState(0);
+    const [caretEndPosition5, setCaretEndPosition5] = useState(0);
+    const [clipZoneWidth1, setClipZoneWidth1] = useState(0);
+    const [clipZoneWidth2, setClipZoneWidth2] = useState(0);
+    const [clipZoneWidth3, setClipZoneWidth3] = useState(0);
+    const [clipZoneWidth4, setClipZoneWidth4] = useState(0);
+    const [clipZoneWidth5, setClipZoneWidth5] = useState(0);
     const [textLines, setTextLines] = useState([]);
     const [lastLineIndex, setLastLineIndex] = useState(0);
 
     const lineHeight = 18;
     const rootUserPrefixCharacters = 13;
+    const typingSpeed = 0.02 // seconds per character
     // TODO don't hardcode this
     const maxCharacters = 85;
 
     useEffect(() => {
-        if (textLines.length > 0) {
-            let boundingBox = lineOneRef.current.getBBox();
-            setClipZoneWidthOne(boundingBox.width);
-            setCaretEndPositionOne(boundingBox.x + boundingBox.width);
-            boundingBox = lineTwoRef.current.getBBox();
-            setClipZoneWidthTwo(boundingBox.width);
-            setCaretEndPositionTwo(boundingBox.x + boundingBox.width);
+        if (textLines.length > 0 && line1Ref.current && line2Ref.current && line3Ref.current && line4Ref.current && line5Ref.current) {
+            let boundingBox = line1Ref.current.getBBox();
+            setClipZoneWidth1(boundingBox.width);
+            setCaretEndPosition1(boundingBox.x + boundingBox.width);
+            boundingBox = line2Ref.current.getBBox();
+            setClipZoneWidth2(boundingBox.width);
+            setCaretEndPosition2(boundingBox.x + boundingBox.width);
+            boundingBox = line3Ref.current.getBBox();
+            setClipZoneWidth3(boundingBox.width);
+            setCaretEndPosition3(boundingBox.x + boundingBox.width);
+            boundingBox = line4Ref.current.getBBox();
+            setClipZoneWidth4(boundingBox.width);
+            setCaretEndPosition4(boundingBox.x + boundingBox.width);
+            boundingBox = line5Ref.current.getBBox();
+            setClipZoneWidth5(boundingBox.width);
+            setCaretEndPosition5(boundingBox.x + boundingBox.width);
+            console.log("here");
         }
-    },[textLines])
+    },[textLines, line1Ref, line2Ref, line3Ref, line4Ref, line5Ref])
 
     useEffect(() => {
         const arr = [];
@@ -51,51 +74,123 @@ export default function LinuxConsole({rawText}) {
         setTextLines(arr);
     }, [rawText])
 
-    const textOneControl = useAnimation()
-    const caretOneControl = useAnimation()
-    const textTwoControl = useAnimation()
-    const caretTwoControl = useAnimation()
+    const text1Control = useAnimation()
+    const caret1Control = useAnimation()
+    const text2Control = useAnimation()
+    const caret2Control = useAnimation()
+    const text3Control = useAnimation()
+    const caret3Control = useAnimation()
+    const text4Control = useAnimation()
+    const caret4Control = useAnimation()
+    const text5Control = useAnimation()
+    const caret5Control = useAnimation()
 
     useEffect(() => {
-        if (caretEndPositionOne !== 0) {
+        if (caretEndPosition1 !== 0) {
             const sequence = async() => {
                 await Promise.all([
-                    caretOneControl.start({
-                        x1: caretEndPositionOne,
-                        x2: caretEndPositionOne,
+                    caret1Control.start({
+                        x1: caretEndPosition1,
+                        x2: caretEndPosition1,
                         transition: {
-                            duration: 2,
+                            duration: textLines[0].length * typingSpeed,
                             ease: "linear"
                         },
                         transitionEnd: {
                             visibility: lastLineIndex === 0 ? "visible" : "hidden",
                         }
                     }),
-                    textOneControl.start({
-                        width: clipZoneWidthOne,
+                    text1Control.start({
+                        width: clipZoneWidth1,
                         transition: {
-                            duration: 2,
+                            duration: textLines[0].length * typingSpeed,
                             ease: "linear"
                         }
                     })
                 ])
                 if (lastLineIndex >= 1) {
                     await Promise.all([
-                        caretTwoControl.start({
-                            x1: caretEndPositionTwo,
-                            x2: caretEndPositionTwo,
+                        caret2Control.start({
+                            x1: caretEndPosition2,
+                            x2: caretEndPosition2,
                             transition: {
-                                duration: 2,
+                                duration: textLines[1].length * typingSpeed,
                                 ease: "linear"
                             },
                             transitionEnd: {
                                 visibility: lastLineIndex === 1 ? "visible" : "hidden",
                             }
                         }),
-                        textTwoControl.start({
-                            width: clipZoneWidthTwo,
+                        text2Control.start({
+                            width: clipZoneWidth2,
                             transition: {
-                                duration: 2,
+                                duration: textLines[1].length * typingSpeed,
+                                ease: "linear"
+                            }
+                        })
+                    ])
+                }
+                if (lastLineIndex >= 2) {
+                    await Promise.all([
+                        caret3Control.start({
+                            x1: caretEndPosition3,
+                            x2: caretEndPosition3,
+                            transition: {
+                                duration: textLines[2].length * typingSpeed,
+                                ease: "linear"
+                            },
+                            transitionEnd: {
+                                visibility: lastLineIndex === 2 ? "visible" : "hidden",
+                            }
+                        }),
+                        text3Control.start({
+                            width: clipZoneWidth3,
+                            transition: {
+                                duration: textLines[2].length * typingSpeed,
+                                ease: "linear"
+                            }
+                        })
+                    ])
+                }
+                if (lastLineIndex >= 3) {
+                    await Promise.all([
+                        caret4Control.start({
+                            x1: caretEndPosition4,
+                            x2: caretEndPosition4,
+                            transition: {
+                                duration: textLines[3].length * typingSpeed,
+                                ease: "linear"
+                            },
+                            transitionEnd: {
+                                visibility: lastLineIndex === 3 ? "visible" : "hidden",
+                            }
+                        }),
+                        text4Control.start({
+                            width: clipZoneWidth4,
+                            transition: {
+                                duration: textLines[3].length * typingSpeed,
+                                ease: "linear"
+                            }
+                        })
+                    ])
+                }
+                if (lastLineIndex >= 4) {
+                    await Promise.all([
+                        caret5Control.start({
+                            x1: caretEndPosition5,
+                            x2: caretEndPosition5,
+                            transition: {
+                                duration: textLines[4].length * typingSpeed,
+                                ease: "linear"
+                            },
+                            transitionEnd: {
+                                visibility: lastLineIndex === 4 ? "visible" : "hidden",
+                            }
+                        }),
+                        text5Control.start({
+                            width: clipZoneWidth5,
+                            transition: {
+                                duration: textLines[4].length * typingSpeed,
                                 ease: "linear"
                             }
                         })
@@ -104,7 +199,7 @@ export default function LinuxConsole({rawText}) {
             }
             sequence();
         }
-    }, [caretEndPositionOne, caretEndPositionTwo, caretOneControl, caretTwoControl, clipZoneWidthOne, clipZoneWidthTwo, lastLineIndex, textOneControl, textTwoControl])
+    }, [caretEndPosition1, caretEndPosition2, caret1Control, caret2Control, clipZoneWidth1, clipZoneWidth2, lastLineIndex, text1Control, text2Control, caret3Control, caretEndPosition3, text3Control, clipZoneWidth3, caret4Control, caretEndPosition4, clipZoneWidth4, caretEndPosition5, clipZoneWidth5])
 
 
     return (
@@ -112,10 +207,19 @@ export default function LinuxConsole({rawText}) {
             <svg width="800" height="200" viewBox="40 30 735 170" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="line1">
-                        <motion.rect x="160" y="72" animate={textOneControl} width={0} height={lineHeight}/>
+                        <motion.rect x="160" y="72" animate={text1Control} width={0} height={lineHeight}/>
                     </clipPath>
                     <clipPath id="line2">
-                        <motion.rect x="52" y="87" animate={textTwoControl} width={0} height={lineHeight}/>
+                        <motion.rect x="52" y="87" animate={text2Control} width={0} height={lineHeight}/>
+                    </clipPath>
+                    <clipPath id="line3">
+                        <motion.rect x="52" y="102" animate={text3Control} width={0} height={lineHeight}/>
+                    </clipPath>
+                    <clipPath id="line4">
+                        <motion.rect x="52" y="117" animate={text4Control} width={0} height={lineHeight}/>
+                    </clipPath>
+                    <clipPath id="line5">
+                        <motion.rect x="52" y="132" animate={text5Control} width={0} height={lineHeight}/>
                     </clipPath>
                 </defs>
                 <g>
@@ -128,13 +232,24 @@ export default function LinuxConsole({rawText}) {
                         root-user:~$
                     </text>
                     <g clipPath="url(#line1)">
-                        <text ref={lineOneRef} fontFamily="monospace" fontSize="14" y="85" x="160" fill="white">{textLines[0]}</text>
-                        <motion.line className="caret" x1="160" x2="160" y1="72" y2="90" animate={caretOneControl} stroke="white" strokeWidth="2"/>
+                        <text ref={line1Ref} fontFamily="monospace" fontSize="14" y="85" x="160" fill="white">{textLines[0]}</text>
+                        <motion.line className="caret" x1="160" x2="160" y1="72" y2="90" animate={caret1Control} stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line2)">
-                        <text ref={lineTwoRef} fontFamily="monospace" fontSize="14" y="100" x="52" fill="white">{textLines[1]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="87" y2="105" animate={caretTwoControl} stroke="white" strokeWidth="2"/>
-                        {/*<motion.line className="caret" x1="52" x2="52" y1="87" y2="105" animate={{x1: caretEndPositionOne, x2: caretEndPositionOne}} transition={{duration: 2, ease: "linear"}} stroke="white" strokeWidth="2"/>*/}
+                        <text ref={line2Ref} fontFamily="monospace" fontSize="14" y="100" x="52" fill="white">{textLines[1]}</text>
+                        <motion.line className="caret" x1="52" x2="52" y1="87" y2="105" animate={caret2Control} stroke="white" strokeWidth="2"/>
+                    </g>
+                    <g clipPath="url(#line3)">
+                        <text ref={line3Ref} fontFamily="monospace" fontSize="14" y="115" x="52" fill="white">{textLines[2]}</text>
+                        <motion.line className="caret" x1="52" x2="52" y1="102" y2="120" animate={caret3Control} stroke="white" strokeWidth="2"/>
+                    </g>
+                    <g clipPath="url(#line4)">
+                        <text ref={line4Ref} fontFamily="monospace" fontSize="14" y="130" x="52" fill="white">{textLines[3]}</text>
+                        <motion.line className="caret" x1="52" x2="52" y1="117" y2="135" animate={caret4Control} stroke="white" strokeWidth="2"/>
+                    </g>
+                    <g clipPath="url(#line5)">
+                        <text ref={line5Ref} fontFamily="monospace" fontSize="14" y="145" x="52" fill="white">{textLines[4]}</text>
+                        <motion.line className="caret" x1="52" x2="52" y1="132" y2="150" animate={caret5Control} stroke="white" strokeWidth="2"/>
                     </g>
                 </g>
             </svg>
