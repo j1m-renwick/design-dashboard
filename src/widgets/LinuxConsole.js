@@ -19,7 +19,7 @@ export default function LinuxConsole() {
     const lineHeight = 18;
 
     useEffect(() => {
-        if (lineOneRef.current) {
+        if (lineOneRef.current && textLines.length > 0) {
             const boundingBox = lineOneRef.current.getBBox();
             setClipZoneWidthOne(boundingBox.width);
             setCaretEndPositionOne(boundingBox.x + boundingBox.width);
@@ -27,7 +27,7 @@ export default function LinuxConsole() {
     },[lineOneRef, textLines])
 
     useEffect(() => {
-        if (lineTwoRef.current) {
+        if (lineTwoRef.current && textLines.length > 0) {
             const boundingBox = lineTwoRef.current.getBBox();
             // setClipZoneHeight(boundingBox.height);
             setClipZoneWidthTwo(boundingBox.width);
