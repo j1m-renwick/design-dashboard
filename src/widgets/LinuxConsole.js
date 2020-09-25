@@ -25,6 +25,7 @@ export default function LinuxConsole({rawText}) {
     const [textLines, setTextLines] = useState([]);
     const [lastLineIndex, setLastLineIndex] = useState(0);
 
+    const maxNumberOfLines = 5;
     const lineHeight = 18;
     const rootUserPrefixCharacters = 13;
     const typingSpeed = 0.02 // seconds per character
@@ -48,7 +49,6 @@ export default function LinuxConsole({rawText}) {
             boundingBox = line5Ref.current.getBBox();
             setClipZoneWidth5(boundingBox.width);
             setCaretEndPosition5(boundingBox.x + boundingBox.width);
-            console.log("here");
         }
     },[textLines, line1Ref, line2Ref, line3Ref, line4Ref, line5Ref])
 
@@ -59,18 +59,22 @@ export default function LinuxConsole({rawText}) {
             arr[0] = rawText.slice(0, index)
             let textToSplit = rawText.slice(index)
             let i = 1;
-            while (textToSplit.length > maxCharacters) {
+            while (textToSplit.length > maxCharacters && i < (maxNumberOfLines - 1)) {
                 let index = textToSplit.lastIndexOf(" ", maxCharacters);
                 arr[i] = textToSplit.slice(0, index)
                 textToSplit = textToSplit.slice(index)
                 i++
             }
-            arr[i] = textToSplit;
+
+            if (textToSplit.length > maxCharacters) {
+                arr[i] = textToSplit.substring(0, maxCharacters - 5) + "..."
+            } else {
+                arr[i] = textToSplit;
+            }
             setLastLineIndex(i);
         } else {
             arr[0] = rawText;
         }
-        console.log(arr);
         setTextLines(arr);
     }, [rawText])
 
@@ -199,7 +203,10 @@ export default function LinuxConsole({rawText}) {
             }
             sequence();
         }
-    }, [caretEndPosition1, caretEndPosition2, caret1Control, caret2Control, clipZoneWidth1, clipZoneWidth2, lastLineIndex, text1Control, text2Control, caret3Control, caretEndPosition3, text3Control, clipZoneWidth3, caret4Control, caretEndPosition4, clipZoneWidth4, caretEndPosition5, clipZoneWidth5])
+    }, [caretEndPosition1, caretEndPosition2, caret1Control, caret2Control, clipZoneWidth1, clipZoneWidth2,
+        lastLineIndex, text1Control, text2Control, caret3Control, caretEndPosition3, text3Control, clipZoneWidth3,
+        caret4Control, caretEndPosition4, clipZoneWidth4, caretEndPosition5, clipZoneWidth5, textLines, text4Control,
+        caret5Control, text5Control])
 
 
     return (
@@ -253,7 +260,7 @@ export default function LinuxConsole({rawText}) {
                     </g>
                 </g>
                 <svg x="465px" y="165px" viewBox="0 0 1200 1200">
-                    <g className="copy">
+                    <g onClick={() => navigator.clipboard.writeText(rawText)} className="copy">
                         <path fill="white" d="M89.62,13.96v7.73h12.19h0.01v0.02c3.85,0.01,7.34,1.57,9.86,4.1c2.5,2.51,4.06,5.98,4.07,9.82h0.02v0.02
                             v73.27v0.01h-0.02c-0.01,3.84-1.57,7.33-4.1,9.86c-2.51,2.5-5.98,4.06-9.82,4.07v0.02h-0.02h-61.7H40.1v-0.02
                             c-3.84-0.01-7.34-1.57-9.86-4.1c-2.5-2.51-4.06-5.98-4.07-9.82h-0.02v-0.02V92.51H13.96h-0.01v-0.02c-3.84-0.01-7.34-1.57-9.86-4.1
