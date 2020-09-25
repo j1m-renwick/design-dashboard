@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {motion, useAnimation} from "framer-motion";
 import './LinuxConsole.css';
 
-export default function LinuxConsole() {
+export default function LinuxConsole({rawText}) {
 
     const lineOneRef = useRef();
     const lineTwoRef = useRef();
@@ -10,30 +10,24 @@ export default function LinuxConsole() {
     const [caretEndPositionTwo, setCaretEndPositionTwo] = useState(0);
     const [clipZoneWidthOne, setClipZoneWidthOne] = useState(0);
     const [clipZoneWidthTwo, setClipZoneWidthTwo] = useState(0);
-    const rawText = "You seem malnourished. Are you suffering from intestinal parasites? Perhaps, but perhaps your civilization is merely the sewer of an even greater society above you! This is the worst kind of discrimination: the kind against me! Enough about your promiscuous mother, Hermes! We have bigger problems. You can crush me but you can't crush my spirit! Oh, I think we should just stay friends. I've got to find a way to escape the horrible ravages of youth. Suddenly, I'm going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now 'I'' have to pay ''them'! This opera's as lousy as it is brilliant! Your lyrics lack subtlety. You can't just have your characters announce how they feel. That makes me feel angry! Shut up and get to the point! I love this planet! I've got wealth, fame, and access to the depths of sleaze that those things bring. Goodbye, cruel world. Goodbye, cruel lamp. Goodbye, cruel velvet drapes, lined with what would appear to be some sort of cruel muslin and the cute little pom-pom curtain pull cords. Cruel though they may be… But I know you in the future. I cleaned your poop. The alien mothership is in orbit here. If we can hit that bullseye, the rest of the dominoes will fall like a house of cards. Checkmate. Well, let's just dump it in the sewer and say we delivered it. You've killed me! Oh, you've killed me!"
     const [textLines, setTextLines] = useState([]);
+    const [lastLineIndex, setLastLineIndex] = useState(0);
 
-    // TODO don't hardcode these
-    const maxCharacters = 85;
-    const rootUserPrefixCharacters = 13;
     const lineHeight = 18;
+    const rootUserPrefixCharacters = 13;
+    // TODO don't hardcode this
+    const maxCharacters = 85;
 
     useEffect(() => {
-        if (lineOneRef.current && textLines.length > 0) {
-            const boundingBox = lineOneRef.current.getBBox();
+        if (textLines.length > 0) {
+            let boundingBox = lineOneRef.current.getBBox();
             setClipZoneWidthOne(boundingBox.width);
             setCaretEndPositionOne(boundingBox.x + boundingBox.width);
-        }
-    },[lineOneRef, textLines])
-
-    useEffect(() => {
-        if (lineTwoRef.current && textLines.length > 0) {
-            const boundingBox = lineTwoRef.current.getBBox();
-            // setClipZoneHeight(boundingBox.height);
+            boundingBox = lineTwoRef.current.getBBox();
             setClipZoneWidthTwo(boundingBox.width);
             setCaretEndPositionTwo(boundingBox.x + boundingBox.width);
         }
-    },[lineTwoRef, textLines])
+    },[textLines])
 
     useEffect(() => {
         const arr = [];
@@ -49,11 +43,13 @@ export default function LinuxConsole() {
                 i++
             }
             arr[i] = textToSplit;
+            setLastLineIndex(i);
         } else {
             arr[0] = rawText;
         }
+        console.log(arr);
         setTextLines(arr);
-    }, [])
+    }, [rawText])
 
     const textOneControl = useAnimation()
     const caretOneControl = useAnimation()
@@ -61,7 +57,7 @@ export default function LinuxConsole() {
     const caretTwoControl = useAnimation()
 
     useEffect(() => {
-        if (caretEndPositionOne !== 0 && caretEndPositionTwo !== 0) {
+        if (caretEndPositionOne !== 0) {
             const sequence = async() => {
                 await Promise.all([
                     caretOneControl.start({
@@ -72,41 +68,43 @@ export default function LinuxConsole() {
                             ease: "linear"
                         },
                         transitionEnd: {
-                            visibility: "hidden",
+                            visibility: lastLineIndex === 0 ? "visible" : "hidden",
                         }
                     }),
                     textOneControl.start({
                         width: clipZoneWidthOne,
-                            transition: {
-                                duration: 2,
-                                ease: "linear"
-                            }
-                        })
-                ])
-                return await Promise.all([
-                    caretTwoControl.start({
-                        x1: caretEndPositionTwo,
-                        x2: caretEndPositionTwo,
-                        transition: {
-                            duration: 2,
-                            ease: "linear"
-                        },
-                        transitionEnd: {
-                            visibility: "hidden",
-                        }
-                    }),
-                    textTwoControl.start({
-                        width: clipZoneWidthTwo,
                         transition: {
                             duration: 2,
                             ease: "linear"
                         }
                     })
                 ])
+                if (lastLineIndex >= 1) {
+                    await Promise.all([
+                        caretTwoControl.start({
+                            x1: caretEndPositionTwo,
+                            x2: caretEndPositionTwo,
+                            transition: {
+                                duration: 2,
+                                ease: "linear"
+                            },
+                            transitionEnd: {
+                                visibility: lastLineIndex === 1 ? "visible" : "hidden",
+                            }
+                        }),
+                        textTwoControl.start({
+                            width: clipZoneWidthTwo,
+                            transition: {
+                                duration: 2,
+                                ease: "linear"
+                            }
+                        })
+                    ])
+                }
             }
             sequence();
         }
-    }, [caretEndPositionOne, caretEndPositionTwo])
+    }, [caretEndPositionOne, caretEndPositionTwo, caretOneControl, caretTwoControl, clipZoneWidthOne, clipZoneWidthTwo, lastLineIndex, textOneControl, textTwoControl])
 
 
     return (
