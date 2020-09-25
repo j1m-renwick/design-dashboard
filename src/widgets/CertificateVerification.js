@@ -38,7 +38,7 @@ export default function CertificateVerification() {
                 </svg>
                 </div>
             </div>
-            <LinuxConsole rawText="SIGNATURE_HEX=$(openssl x509 -in *.google.com.cer -inform DER -text -noout -certopt ca_default -certopt no_validity -certopt no_serial -certopt no_subject -certopt no_extensions -certopt no_signame | grep -v 'Signature Algorithm' | tr -d '[:space:]:')"/>
+            <LinuxConsole rawText="SIGNATURE_HEX=$(openssl x509 -in *.google.com.cer -inform DER -text -noout -certopt ca_default -certopt no_validity -certopt no_serial -certopt no_subject -certopt no_extensions -certopt no_signame | grep -v 'Signature Algorithm' | tr -d '[:space:]:') rm DER -text -noout -certopt ca_default -certopt no_validity -certopt no_serial -certopt no_subject -certopt no_extensions -certopt no_signame | grep -v 'Signature Algorithm' | tr -d '[:space:]:')"/>
             {/*<LinuxConsole rawText="SIGNATURE_HEX=$(opens"/>*/}
         </div>
     );

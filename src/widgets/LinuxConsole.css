@@ -7,3 +7,11 @@
     from, to { stroke-opacity: 0 }
     50% { stroke-opacity: 1; }
 }
+
+.copy {
+    pointer-events: bounding-box;
+    opacity: 0.4;
+}
+.copy:hover {
+    opacity: 1;
+}
