@@ -15,7 +15,7 @@ export default function Widget() {
         mainContainer: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
-            backgroundColor: "#2c387e",
+            backgroundColor: "#90caf9",
             height: "100vh"
         }
     }))();

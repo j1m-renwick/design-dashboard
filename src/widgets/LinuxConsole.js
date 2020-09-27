@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {motion, useAnimation} from "framer-motion";
 import './LinuxConsole.css';
+import { Container } from '@material-ui/core';
 
 export default function LinuxConsole({rawText}) {
 
@@ -210,8 +211,8 @@ export default function LinuxConsole({rawText}) {
 
 
     return (
-        <div>
-            <svg width="800" height="200" viewBox="40 30 735 170" xmlns="http://www.w3.org/2000/svg">
+        <Container maxWidth="md" style={{flex: 1}}>
+            <svg viewBox="40 30 735 170" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="line1">
                         <motion.rect x="160" y="72" animate={text1Control} width={0} height={lineHeight}/>
@@ -275,6 +276,6 @@ export default function LinuxConsole({rawText}) {
                     </g>
                 </svg>
             </svg>
-        </div>
+        </Container>
     );
 }
