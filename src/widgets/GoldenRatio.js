@@ -134,7 +134,6 @@ export default function GoldenRatio() {
         <Container className={classes.container}>
             <svg className={classes.svgContainer} width="1056" height="656" viewBox="0 0 528 328" xmlns="http://www.w3.org/2000/svg">
                 <g>
-                    <title>Layer 1</title>
                     <ellipse onAnimationEnd={updateAfterAnimation} className={clsx("circle-0", direction)} stroke="none"
                              ry="161" rx="161" id="svg_10" cy="163.45312" cx="162.7"
                              fillOpacity="null" strokeOpacity="null" strokeWidth="2" fill="#ffcd38" opacity="0"/>
