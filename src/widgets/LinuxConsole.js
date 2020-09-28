@@ -3,7 +3,7 @@ import {motion, useAnimation} from "framer-motion";
 import './LinuxConsole.css';
 import { Container } from '@material-ui/core';
 
-export default function LinuxConsole({rawText}) {
+export default function LinuxConsole({consoleText}) {
 
     // TODO refactor this into scalable arrays
     // TODO display warning if text exceeds display size
@@ -13,7 +13,7 @@ export default function LinuxConsole({rawText}) {
     const line3Ref = useRef();
     const line4Ref = useRef();
     const line5Ref = useRef();
-    const [caretEndPosition1, setCaretEndPosition1] = useState(0);
+    const [caretEndPosition1, setCaretEndPosition1] = useState(-1);
     const [caretEndPosition2, setCaretEndPosition2] = useState(0);
     const [caretEndPosition3, setCaretEndPosition3] = useState(0);
     const [caretEndPosition4, setCaretEndPosition4] = useState(0);
@@ -29,9 +29,8 @@ export default function LinuxConsole({rawText}) {
     const maxNumberOfLines = 5;
     const lineHeight = 18;
     const rootUserPrefixCharacters = 13;
-    const typingSpeed = 0.02 // seconds per character
-    // TODO don't hardcode this
-    const maxCharacters = 85;
+    const typingSpeed = 0.03 // seconds per character
+    const maxCharactersPerLine = 85;
 
     useEffect(() => {
         if (textLines.length > 0 && line1Ref.current && line2Ref.current && line3Ref.current && line4Ref.current && line5Ref.current) {
@@ -55,29 +54,45 @@ export default function LinuxConsole({rawText}) {
 
     useEffect(() => {
         const arr = [];
-        if (rawText.length > maxCharacters - rootUserPrefixCharacters) {
-            let index = rawText.lastIndexOf(" ", maxCharacters - rootUserPrefixCharacters);
-            arr[0] = rawText.slice(0, index)
-            let textToSplit = rawText.slice(index)
+        if (consoleText.length > maxCharactersPerLine - rootUserPrefixCharacters) {
+            let index = consoleText.lastIndexOf(" ", maxCharactersPerLine - rootUserPrefixCharacters);
+            arr[0] = consoleText.slice(0, index)
+            let textToSplit = consoleText.slice(index)
             let i = 1;
-            while (textToSplit.length > maxCharacters && i < (maxNumberOfLines - 1)) {
-                let index = textToSplit.lastIndexOf(" ", maxCharacters);
+            while (textToSplit.length > maxCharactersPerLine && i < (maxNumberOfLines - 1)) {
+                let index = textToSplit.lastIndexOf(" ", maxCharactersPerLine);
                 arr[i] = textToSplit.slice(0, index)
                 textToSplit = textToSplit.slice(index)
                 i++
             }
 
-            if (textToSplit.length > maxCharacters) {
-                arr[i] = textToSplit.substring(0, maxCharacters - 5) + "..."
+            if (textToSplit.length > maxCharactersPerLine) {
+                arr[i] = textToSplit.substring(0, maxCharactersPerLine - 5) + "..."
             } else {
                 arr[i] = textToSplit;
             }
             setLastLineIndex(i);
         } else {
-            arr[0] = rawText;
+            arr[0] = consoleText;
+            setLastLineIndex(0);
         }
+        // cancel pending animations
+        caret1Control.stop();
+        caret1Control.unmount();
+        caret1Control.mount();
+        caret2Control.stop();
+        caret3Control.stop();
+        caret4Control.stop();
+        caret5Control.stop();
+        text1Control.stop();
+        text2Control.stop();
+        text3Control.stop();
+        text4Control.stop();
+        text5Control.stop();
+        // TODO reset caret and text positions and visibilities
+
         setTextLines(arr);
-    }, [rawText])
+    }, [consoleText])
 
     const text1Control = useAnimation()
     const caret1Control = useAnimation()
@@ -91,8 +106,81 @@ export default function LinuxConsole({rawText}) {
     const caret5Control = useAnimation()
 
     useEffect(() => {
-        if (caretEndPosition1 !== 0) {
+        if (caretEndPosition1 !== -1) {
             const sequence = async() => {
+                // reset all items to initial locations and visibilities
+                await Promise.all([
+                    caret1Control.start({
+                        x1: 160,
+                        x2: 160,
+                        visibility: "visible",
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    text1Control.start({
+                        width: 0,
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    caret2Control.start({
+                        x1: 52,
+                        x2: 52,
+                        visibility: "visible",
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    text2Control.start({
+                        width: 0,
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    caret3Control.start({
+                        x1: 52,
+                        x2: 52,
+                        visibility: "visible",
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    text3Control.start({
+                        width: 0,
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    caret4Control.start({
+                        x1: 52,
+                        x2: 52,
+                        visibility: "visible",
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    text4Control.start({
+                        width: 0,
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    caret5Control.start({
+                        x1: 52,
+                        x2: 52,
+                        visibility: "visible",
+                        transition: {
+                            duration: 0.001
+                        },
+                    }),
+                    text5Control.start({
+                        width: 0,
+                        transition: {
+                            duration: 0.001
+                        },
+                    })
+                ]);
                 await Promise.all([
                     caret1Control.start({
                         x1: caretEndPosition1,
@@ -189,7 +277,7 @@ export default function LinuxConsole({rawText}) {
                                 ease: "linear"
                             },
                             transitionEnd: {
-                                visibility: lastLineIndex === 4 ? "visible" : "hidden",
+                                visibility: lastLineIndex === 4 ? "visible" : "hidden"
                             }
                         }),
                         text5Control.start({
@@ -208,6 +296,7 @@ export default function LinuxConsole({rawText}) {
         lastLineIndex, text1Control, text2Control, caret3Control, caretEndPosition3, text3Control, clipZoneWidth3,
         caret4Control, caretEndPosition4, clipZoneWidth4, caretEndPosition5, clipZoneWidth5, textLines, text4Control,
         caret5Control, text5Control])
+
 
 
     return (
@@ -241,27 +330,27 @@ export default function LinuxConsole({rawText}) {
                     </text>
                     <g clipPath="url(#line1)">
                         <text ref={line1Ref} fontFamily="monospace" fontSize="14" y="85" x="160" fill="white">{textLines[0]}</text>
-                        <motion.line className="caret" x1="160" x2="160" y1="72" y2="90" animate={caret1Control} stroke="white" strokeWidth="2"/>
+                        <motion.line className="caret" x1="160" x2="160" y1="72" y2="90" animate={caret1Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line2)">
                         <text ref={line2Ref} fontFamily="monospace" fontSize="14" y="100" x="52" fill="white">{textLines[1]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="87" y2="105" animate={caret2Control} stroke="white" strokeWidth="2"/>
+                        <motion.line className="caret" x1="52" x2="52" y1="87" y2="105" animate={caret2Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line3)">
                         <text ref={line3Ref} fontFamily="monospace" fontSize="14" y="115" x="52" fill="white">{textLines[2]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="102" y2="120" animate={caret3Control} stroke="white" strokeWidth="2"/>
+                        <motion.line className="caret" x1="52" x2="52" y1="102" y2="120" animate={caret3Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line4)">
                         <text ref={line4Ref} fontFamily="monospace" fontSize="14" y="130" x="52" fill="white">{textLines[3]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="117" y2="135" animate={caret4Control} stroke="white" strokeWidth="2"/>
+                        <motion.line className="caret" x1="52" x2="52" y1="117" y2="135" animate={caret4Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line5)">
                         <text ref={line5Ref} fontFamily="monospace" fontSize="14" y="145" x="52" fill="white">{textLines[4]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="132" y2="150" animate={caret5Control} stroke="white" strokeWidth="2"/>
+                        <motion.line className="caret" x1="52" x2="52" y1="132" y2="150" animate={caret5Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                 </g>
                 <svg x="465px" y="165px" viewBox="0 0 1200 1200">
-                    <g onClick={() => navigator.clipboard.writeText(rawText)} className="copy">
+                    <g onClick={() => navigator.clipboard.writeText(consoleText)} className="copy">
                         <path fill="white" d="M89.62,13.96v7.73h12.19h0.01v0.02c3.85,0.01,7.34,1.57,9.86,4.1c2.5,2.51,4.06,5.98,4.07,9.82h0.02v0.02
                             v73.27v0.01h-0.02c-0.01,3.84-1.57,7.33-4.1,9.86c-2.51,2.5-5.98,4.06-9.82,4.07v0.02h-0.02h-61.7H40.1v-0.02
                             c-3.84-0.01-7.34-1.57-9.86-4.1c-2.5-2.51-4.06-5.98-4.07-9.82h-0.02v-0.02V92.51H13.96h-0.01v-0.02c-3.84-0.01-7.34-1.57-9.86-4.1
