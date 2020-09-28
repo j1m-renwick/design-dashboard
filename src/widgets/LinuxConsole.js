@@ -300,8 +300,8 @@ export default function LinuxConsole({consoleText}) {
 
 
     return (
-        <Container maxWidth="md" style={{flex: 1}}>
-            <svg viewBox="40 30 735 170" xmlns="http://www.w3.org/2000/svg">
+        <Container maxWidth="md" style={{flex: 1, marginBottom: "10px"}}>
+            <svg viewBox="40 67 735 170" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="line1">
                         <motion.rect x="160" y="72" animate={text1Control} width={0} height={lineHeight}/>
@@ -320,11 +320,12 @@ export default function LinuxConsole({consoleText}) {
                     </clipPath>
                 </defs>
                 <g>
-                    <path d="M47,35 h720 q5,0 5,5 v22 h-730 v-22 q0,-5 5,-5 z" fill="grey" stroke="none"/>
-                    <rect id="svg_5" height="130" width="730" y="62" x="42" strokeOpacity="null" strokeWidth="1.5" stroke="none" fill="#000"/>
-                    <text fontWeight="bold" fontFamily="sans-serif" fontSize="14" y="54" x="407" textAnchor="middle" strokeWidth="0" stroke="#ff0000" fill="white">
-                        Terminal
-                    </text>
+                    {/*TODO make the header and text component attributes*/}
+                    {/*<path d="M47,35 h720 q5,0 5,5 v22 h-730 v-22 q0,-5 5,-5 z" fill="darkgrey" stroke="none"/>*/}
+                    {/*<text fontWeight="bold" fontFamily="sans-serif" fontSize="14" y="54" x="407" textAnchor="middle" strokeWidth="0" stroke="#ff0000" fill="white">*/}
+                    {/*    Terminal*/}
+                    {/*</text>*/}
+                    <rect id="svg_5" height="180" width="730" y="62" x="42" strokeOpacity="null" strokeWidth="1.5" stroke="none" fill="#000"/>
                     <text fontWeight="bold" fontFamily="monospace" fontSize="14" y="85" x="52" fill="#8dd247">
                         root-user:~$
                     </text>
@@ -349,7 +350,7 @@ export default function LinuxConsole({consoleText}) {
                         <motion.line className="caret" x1="52" x2="52" y1="132" y2="150" animate={caret5Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                 </g>
-                <svg x="465px" y="165px" viewBox="0 0 1200 1200">
+                <svg x="300px" y="100px" viewBox="-1150 -770 1200 1200">
                     <g onClick={() => navigator.clipboard.writeText(consoleText)} className="copy">
                         <path fill="white" d="M89.62,13.96v7.73h12.19h0.01v0.02c3.85,0.01,7.34,1.57,9.86,4.1c2.5,2.51,4.06,5.98,4.07,9.82h0.02v0.02
                             v73.27v0.01h-0.02c-0.01,3.84-1.57,7.33-4.1,9.86c-2.51,2.5-5.98,4.06-9.82,4.07v0.02h-0.02h-61.7H40.1v-0.02

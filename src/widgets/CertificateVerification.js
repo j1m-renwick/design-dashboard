@@ -33,7 +33,7 @@ export default function CertificateVerification() {
     return (
         <div style={{display: "flex", justifyContent: "center", flexDirection: "column", height: "100%"}}>
             <div style={{flex: "3", margin: "10px"}}>
-                <motion.div onClick={() => clickAnimation()} initial={false} animate={variants[keyFrame]}>
+                <motion.div onClick={() => clickAnimation()} initial={false} animate={variants[keyFrame]} style={{position: "absolute"}}>
                     <svg width="264" height="420" viewBox="58 65 265 421" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <rect stroke="#000" rx="25" height="419.99999" width="263.99999" y="65.45313" x="58.50001"
