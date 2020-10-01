@@ -3,7 +3,7 @@ import './LinuxConsole.css';
 import {Container} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 
-export default function InstructionBox({text}) {
+export default function InstructionBox({text, onClick}) {
 
     const classes = makeStyles(theme => ({
             container: {
@@ -23,6 +23,6 @@ export default function InstructionBox({text}) {
     )();
 
     return (
-        <Container dangerouslySetInnerHTML={{__html: text}} className={classes.container} maxWidth="md"/>
+        <Container onClick={onClick} dangerouslySetInnerHTML={{__html: text}} className={classes.container} maxWidth="md"/>
     );
 }

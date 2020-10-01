@@ -3,7 +3,7 @@ import {motion, useAnimation} from "framer-motion";
 import './LinuxConsole.css';
 import { Container } from '@material-ui/core';
 
-export default function LinuxConsole({consoleText}) {
+export default function LinuxConsole({consoleText, onClick}) {
 
     // TODO refactor this into scalable arrays
     // TODO display warning if text exceeds display size
@@ -30,7 +30,7 @@ export default function LinuxConsole({consoleText}) {
     const lineHeight = 18;
     const rootUserPrefixCharacters = 13;
     const typingSpeed = 0.03 // seconds per character
-    const maxCharactersPerLine = 85;
+    const maxCharactersPerLine = 84;
 
     useEffect(() => {
         if (textLines.length > 0 && line1Ref.current && line2Ref.current && line3Ref.current && line4Ref.current && line5Ref.current) {
@@ -300,7 +300,7 @@ export default function LinuxConsole({consoleText}) {
 
 
     return (
-        <Container maxWidth="md" style={{flex: 1, marginBottom: "10px"}}>
+        <Container onClick={onClick} maxWidth="md" style={{flex: 1, marginBottom: "10px"}}>
             <svg viewBox="40 67 735 170" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="line1">

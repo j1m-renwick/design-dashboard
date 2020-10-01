@@ -7,7 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import GoldenRatio from "./widgets/GoldenRatio";
 import {useRecoilValue} from "recoil/dist";
 import {selectedWidget as selectedWidgetAtom} from "./atoms/DrawerAtoms";
-import CertificateVerification from "./widgets/CertificateVerification";
+import CertificateVerification from "./widgets/certificate/CertificateVerification";
 
 export default function Widget() {
 
