@@ -3,7 +3,7 @@ import {motion, useAnimation} from "framer-motion";
 import './LinuxConsole.css';
 import { Container } from '@material-ui/core';
 
-export default function LinuxConsole({consoleText, onClick}) {
+export default function LinuxConsole({consoleText, onClick, output}) {
 
     // TODO refactor this into scalable arrays
     // TODO display warning if text exceeds display size
@@ -13,6 +13,7 @@ export default function LinuxConsole({consoleText, onClick}) {
     const line3Ref = useRef();
     const line4Ref = useRef();
     const line5Ref = useRef();
+    const lineOutputRef = useRef();
     const [caretEndPosition1, setCaretEndPosition1] = useState(-1);
     const [caretEndPosition2, setCaretEndPosition2] = useState(0);
     const [caretEndPosition3, setCaretEndPosition3] = useState(0);
@@ -23,7 +24,9 @@ export default function LinuxConsole({consoleText, onClick}) {
     const [clipZoneWidth3, setClipZoneWidth3] = useState(0);
     const [clipZoneWidth4, setClipZoneWidth4] = useState(0);
     const [clipZoneWidth5, setClipZoneWidth5] = useState(0);
+    const [clipZoneWidthOutput, setClipZoneWidthOutput] = useState(0);
     const [textLines, setTextLines] = useState([]);
+    const [outputText, setOutputText] = useState("");
     const [lastLineIndex, setLastLineIndex] = useState(0);
 
     const maxNumberOfLines = 5;
@@ -33,7 +36,7 @@ export default function LinuxConsole({consoleText, onClick}) {
     const maxCharactersPerLine = 84;
 
     useEffect(() => {
-        if (textLines.length > 0 && line1Ref.current && line2Ref.current && line3Ref.current && line4Ref.current && line5Ref.current) {
+        if (textLines.length > 0 && line1Ref.current && line2Ref.current && line3Ref.current && line4Ref.current && line5Ref.current && lineOutputRef.current) {
             let boundingBox = line1Ref.current.getBBox();
             setClipZoneWidth1(boundingBox.width);
             setCaretEndPosition1(boundingBox.x + boundingBox.width);
@@ -49,8 +52,10 @@ export default function LinuxConsole({consoleText, onClick}) {
             boundingBox = line5Ref.current.getBBox();
             setClipZoneWidth5(boundingBox.width);
             setCaretEndPosition5(boundingBox.x + boundingBox.width);
+            boundingBox = lineOutputRef.current.getBBox();
+            setClipZoneWidthOutput(boundingBox.width);
         }
-    },[textLines, line1Ref, line2Ref, line3Ref, line4Ref, line5Ref])
+    },[textLines, line1Ref, line2Ref, line3Ref, line4Ref, line5Ref, lineOutputRef])
 
     useEffect(() => {
         const arr = [];
@@ -89,9 +94,9 @@ export default function LinuxConsole({consoleText, onClick}) {
         text3Control.stop();
         text4Control.stop();
         text5Control.stop();
-        // TODO reset caret and text positions and visibilities
-
+        textOutputControl.stop();
         setTextLines(arr);
+        setOutputText(output)
     }, [consoleText])
 
     const text1Control = useAnimation()
@@ -104,6 +109,7 @@ export default function LinuxConsole({consoleText, onClick}) {
     const caret4Control = useAnimation()
     const text5Control = useAnimation()
     const caret5Control = useAnimation()
+    const textOutputControl = useAnimation()
 
     useEffect(() => {
         if (caretEndPosition1 !== -1) {
@@ -179,6 +185,12 @@ export default function LinuxConsole({consoleText, onClick}) {
                         transition: {
                             duration: 0.001
                         },
+                    }),
+                    textOutputControl.start({
+                        width: 0,
+                        transition: {
+                            duration: 0.001
+                        },
                     })
                 ]);
                 await Promise.all([
@@ -190,7 +202,7 @@ export default function LinuxConsole({consoleText, onClick}) {
                             ease: "linear"
                         },
                         transitionEnd: {
-                            visibility: lastLineIndex === 0 ? "visible" : "hidden",
+                            visibility: "hidden"
                         }
                     }),
                     text1Control.start({
@@ -211,7 +223,7 @@ export default function LinuxConsole({consoleText, onClick}) {
                                 ease: "linear"
                             },
                             transitionEnd: {
-                                visibility: lastLineIndex === 1 ? "visible" : "hidden",
+                                visibility: "hidden"
                             }
                         }),
                         text2Control.start({
@@ -233,7 +245,7 @@ export default function LinuxConsole({consoleText, onClick}) {
                                 ease: "linear"
                             },
                             transitionEnd: {
-                                visibility: lastLineIndex === 2 ? "visible" : "hidden",
+                                visibility: "hidden"
                             }
                         }),
                         text3Control.start({
@@ -255,7 +267,7 @@ export default function LinuxConsole({consoleText, onClick}) {
                                 ease: "linear"
                             },
                             transitionEnd: {
-                                visibility: lastLineIndex === 3 ? "visible" : "hidden",
+                                visibility: "hidden"
                             }
                         }),
                         text4Control.start({
@@ -277,7 +289,7 @@ export default function LinuxConsole({consoleText, onClick}) {
                                 ease: "linear"
                             },
                             transitionEnd: {
-                                visibility: lastLineIndex === 4 ? "visible" : "hidden"
+                                visibility: "hidden"
                             }
                         }),
                         text5Control.start({
@@ -289,13 +301,22 @@ export default function LinuxConsole({consoleText, onClick}) {
                         })
                     ])
                 }
+                if (outputText.length > 0) {
+                    await textOutputControl.start({
+                        width: clipZoneWidthOutput,
+                        transition: {
+                            duration: 0.001,
+                            delay: 1
+                        }
+                    })
+                }
             }
             sequence();
         }
     }, [caretEndPosition1, caretEndPosition2, caret1Control, caret2Control, clipZoneWidth1, clipZoneWidth2,
         lastLineIndex, text1Control, text2Control, caret3Control, caretEndPosition3, text3Control, clipZoneWidth3,
         caret4Control, caretEndPosition4, clipZoneWidth4, caretEndPosition5, clipZoneWidth5, textLines, text4Control,
-        caret5Control, text5Control])
+        caret5Control, text5Control, textOutputControl, clipZoneWidthOutput])
 
 
 
@@ -304,19 +325,22 @@ export default function LinuxConsole({consoleText, onClick}) {
             <svg viewBox="40 67 735 170" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="line1">
-                        <motion.rect x="160" y="72" animate={text1Control} width={0} height={lineHeight}/>
+                        <motion.rect x="160" y="77" animate={text1Control} width={0} height={lineHeight}/>
                     </clipPath>
                     <clipPath id="line2">
-                        <motion.rect x="52" y="87" animate={text2Control} width={0} height={lineHeight}/>
+                        <motion.rect x="52" y="92" animate={text2Control} width={0} height={lineHeight}/>
                     </clipPath>
                     <clipPath id="line3">
-                        <motion.rect x="52" y="102" animate={text3Control} width={0} height={lineHeight}/>
+                        <motion.rect x="52" y="107" animate={text3Control} width={0} height={lineHeight}/>
                     </clipPath>
                     <clipPath id="line4">
-                        <motion.rect x="52" y="117" animate={text4Control} width={0} height={lineHeight}/>
+                        <motion.rect x="52" y="122" animate={text4Control} width={0} height={lineHeight}/>
                     </clipPath>
                     <clipPath id="line5">
-                        <motion.rect x="52" y="132" animate={text5Control} width={0} height={lineHeight}/>
+                        <motion.rect x="52" y="137" animate={text5Control} width={0} height={lineHeight}/>
+                    </clipPath>
+                    <clipPath id="output">
+                        <motion.rect x="52" y="195" animate={textOutputControl} width={0} height={lineHeight}/>
                     </clipPath>
                 </defs>
                 <g>
@@ -326,28 +350,33 @@ export default function LinuxConsole({consoleText, onClick}) {
                     {/*    Terminal*/}
                     {/*</text>*/}
                     <rect id="svg_5" height="180" width="730" y="62" x="42" strokeOpacity="null" strokeWidth="1.5" stroke="none" fill="#000"/>
-                    <text fontWeight="bold" fontFamily="monospace" fontSize="14" y="85" x="52" fill="#8dd247">
+                    <text fontWeight="bold" fontFamily="monospace" fontSize="14" y="90" x="52" fill="#8dd247">
                         root-user:~$
                     </text>
                     <g clipPath="url(#line1)">
-                        <text ref={line1Ref} fontFamily="monospace" fontSize="14" y="85" x="160" fill="white">{textLines[0]}</text>
-                        <motion.line className="caret" x1="160" x2="160" y1="72" y2="90" animate={caret1Control} visibility="visible" stroke="white" strokeWidth="2"/>
+                        <text ref={line1Ref} fontFamily="monospace" fontSize="14" y="90" x="160" fill="white">{textLines[0]}</text>
+                        <motion.line className="caret" x1="160" x2="160" y1="77" y2="95" animate={caret1Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line2)">
-                        <text ref={line2Ref} fontFamily="monospace" fontSize="14" y="100" x="52" fill="white">{textLines[1]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="87" y2="105" animate={caret2Control} visibility="visible" stroke="white" strokeWidth="2"/>
+                        <text ref={line2Ref} fontFamily="monospace" fontSize="14" y="105" x="52" fill="white">{textLines[1]}</text>
+                        <motion.line className="caret" x1="52" x2="52" y1="92" y2="110" animate={caret2Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line3)">
-                        <text ref={line3Ref} fontFamily="monospace" fontSize="14" y="115" x="52" fill="white">{textLines[2]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="102" y2="120" animate={caret3Control} visibility="visible" stroke="white" strokeWidth="2"/>
+                        <text ref={line3Ref} fontFamily="monospace" fontSize="14" y="120" x="52" fill="white">{textLines[2]}</text>
+                        <motion.line className="caret" x1="52" x2="52" y1="107" y2="125" animate={caret3Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line4)">
-                        <text ref={line4Ref} fontFamily="monospace" fontSize="14" y="130" x="52" fill="white">{textLines[3]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="117" y2="135" animate={caret4Control} visibility="visible" stroke="white" strokeWidth="2"/>
+                        <text ref={line4Ref} fontFamily="monospace" fontSize="14" y="135" x="52" fill="white">{textLines[3]}</text>
+                        <motion.line className="caret" x1="52" x2="52" y1="122" y2="140" animate={caret4Control} visibility="visible" stroke="white" strokeWidth="2"/>
                     </g>
                     <g clipPath="url(#line5)">
-                        <text ref={line5Ref} fontFamily="monospace" fontSize="14" y="145" x="52" fill="white">{textLines[4]}</text>
-                        <motion.line className="caret" x1="52" x2="52" y1="132" y2="150" animate={caret5Control} visibility="visible" stroke="white" strokeWidth="2"/>
+                        <text ref={line5Ref} fontFamily="monospace" fontSize="14" y="150" x="52" fill="white">{textLines[4]}</text>
+                        <motion.line className="caret" x1="52" x2="52" y1="137" y2="155" animate={caret5Control} visibility="visible" stroke="white" strokeWidth="2"/>
+                    </g>
+                    <g clipPath="url(#output)">
+                        <text ref={lineOutputRef} fontWeight="bold" fontFamily="monospace" fontSize="14" y="205" x="52" fill="#8dd247">
+                            -> {outputText}
+                        </text>
                     </g>
                 </g>
                 <svg x="300px" y="100px" viewBox="-1150 -770 1200 1200">
