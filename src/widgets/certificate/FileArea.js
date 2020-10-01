@@ -7,7 +7,7 @@ export default function FileArea({state}) {
 
     return (
         <Container style={{height: "70px"}} maxWidth="md">
-            <motion.img className="orig-cert" style={{height: "inherit", opacity: 0}} animate={state.certificateImg ?? {}} src={require("../../images/cert-img.png")}/>
+            <motion.img className="orig-cert" style={{height: "inherit", opacity: 0}} animate={state.certificateFileImg ?? {}} src={require("../../images/cert-img.png")}/>
         </Container>
     );
 }

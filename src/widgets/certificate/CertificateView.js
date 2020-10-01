@@ -1,13 +1,14 @@
 import React, {useRef, useState} from 'react';
-import {motion, transform} from "framer-motion";
+import {transform} from "framer-motion";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {motion} from "framer-motion";
 
 export default function CertificateView({state}) {
 
     const [showViewport, setShowViewport] = useState(false);
     const [magnifierTopOffset, setMagnifierTopOffset] = useState(0);
 
-    const certificateHeightPixelRange = [0, 420 - 75] // 420 is the height, 75 is a magic number i think
+    const certificateHeightPixelRange = [0, 420 - 70] // 420 is the height, 70 is a magic number i think
     const viewportCertificatePixelRange = [0, 3200]
 
 
@@ -56,7 +57,7 @@ export default function CertificateView({state}) {
 
 
     return (
-        <div style={{position: "absolute", left: "450px"}}>
+        <motion.div animate={state} style={{opacity: 0, position: "absolute", left: "450px"}}>
             {/*<motion.div*/}
             {/*    // initial={false} animate={state}*/}
             {/*>*/}
@@ -139,7 +140,10 @@ export default function CertificateView({state}) {
                                 </text>
                                 <text y="1113" x="106.5">Authority Information Access:</text>
                                 <text y="1146" x="132.5">OCSP - URI:http://ocsp.pki.goog/gts1o1core</text>
-                                <text y="1179" x="132.5">CA Issuers - URI:http://pki.goog/gsr2/GTS1O1.crt</text>
+                                <text y="1179" x="132.5">CA Issuers - URI:
+                                    <tspan fill="#66bb6a" stroke="#66bb6a" fontWeight="bold">
+                                        http://pki.goog/gsr2/GTS1O1.crt</tspan>
+                                </text>
                                 <text y="1212" x="106.5">X509v3 Subject Alternative Name:</text>
                                 <text y="1245" x="132.5">DNS:*.google.com, DNS:*.android.com,
                                     DNS:*.appengine.google.com, ...
@@ -206,26 +210,26 @@ export default function CertificateView({state}) {
                                 <text y="2598" x="295.5">9F:53:A4:7D:93:CE:37:7F:CB:2F:CA:6C:1E:56:3D:47:</text>
                                 <text y="2631" x="295.5">16:AC:EB:F2:64:E0:87</text>
                                 <text y="2664" x="28.5">Signature Algorithm: sha256WithRSAEncryption</text>
-                                <text y="2697" x="54.5">2f:de:47:43:cd:2d:0a:ed:6f:6d:3c:4b:39:0e:e6:05:17:74:</text>
-                                <text y="2730" x="54.5">58:a7:33:f0:a1:10:0a:52:94:55:80:52:8a:5c:a0:88:73:35:</text>
-                                <text y="2763" x="54.5">55:cd:d9:51:72:de:c2:96:5c:52:83:f2:ca:05:a1:72:60:06:</text>
-                                <text y="2796" x="54.5">28e:da:4d:80:05:6a:60:fe:60:ab:cc:dc:02:67:84:41:47:cd:</text>
-                                <text y="2829" x="54.5">eb:af:80:6b:ec:d5:0d:6e:56:5a:bd:00:47:d8:62:2f:4c:01:</text>
-                                <text y="2862" x="54.5">93:76:10:bb:16:15:ca:d4:d9:b2:92:0e:5d:96:56:06:95:c3:</text>
-                                <text y="2895" x="54.5">a6:d6:77:fb:97:b6:2f:66:06:7c:0c:21:91:ac:8c:84:16:61:</text>
-                                <text y="2928" x="54.5">40:02:a9:f1:ca:62:e3:e0:72:da:7b:ab:3f:64:27:bb:d0:ff:</text>
-                                <text y="2961" x="54.5">de:a0:c4:6d:a3:72:1d:bc:0e:1d:a7:6a:07:15:69:70:aa:63:</text>
-                                <text y="2994" x="54.5">d2:68:ed:50:d2:44:c4:21:ca:b4:ec:73:0b:0c:b2:86:17:fa:</text>
-                                <text y="3027" x="54.5">cd:4a:ca:57:2c:56:9d:17:10:0e:68:ce:6d:e1:00:d4:65:f1:</text>
-                                <text y="3060" x="54.5">11:63:9f:e4:07:d9:fb:eb:36:7e:77:bc:94:a3:c5:04:8c:ca:</text>
-                                <text y="3093" x="54.5">fa:ec:7a:a3:33:fb:b1:65:82:d0:2b:e7:02:29:f9:c4:91:da:</text>
-                                <text y="3126" x="54.5">3e:62:3e:8a:da:29:c2:91:bb:60:cf:d6:d2:f4:5b:a5:19:37:</text>
-                                <text y="3159" x="54.5">b1:ae:b8:7e</text>
+                                <text y="2697" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">2f:de:47:43:cd:2d:0a:ed:6f:6d:3c:4b:39:0e:e6:05:17:74:</text>
+                                <text y="2730" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">58:a7:33:f0:a1:10:0a:52:94:55:80:52:8a:5c:a0:88:73:35:</text>
+                                <text y="2763" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">55:cd:d9:51:72:de:c2:96:5c:52:83:f2:ca:05:a1:72:60:06:</text>
+                                <text y="2796" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">28e:da:4d:80:05:6a:60:fe:60:ab:cc:dc:02:67:84:41:47:cd:</text>
+                                <text y="2829" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">eb:af:80:6b:ec:d5:0d:6e:56:5a:bd:00:47:d8:62:2f:4c:01:</text>
+                                <text y="2862" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">93:76:10:bb:16:15:ca:d4:d9:b2:92:0e:5d:96:56:06:95:c3:</text>
+                                <text y="2895" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">a6:d6:77:fb:97:b6:2f:66:06:7c:0c:21:91:ac:8c:84:16:61:</text>
+                                <text y="2928" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">40:02:a9:f1:ca:62:e3:e0:72:da:7b:ab:3f:64:27:bb:d0:ff:</text>
+                                <text y="2961" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">de:a0:c4:6d:a3:72:1d:bc:0e:1d:a7:6a:07:15:69:70:aa:63:</text>
+                                <text y="2994" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">d2:68:ed:50:d2:44:c4:21:ca:b4:ec:73:0b:0c:b2:86:17:fa:</text>
+                                <text y="3027" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">cd:4a:ca:57:2c:56:9d:17:10:0e:68:ce:6d:e1:00:d4:65:f1:</text>
+                                <text y="3060" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">11:63:9f:e4:07:d9:fb:eb:36:7e:77:bc:94:a3:c5:04:8c:ca:</text>
+                                <text y="3093" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">fa:ec:7a:a3:33:fb:b1:65:82:d0:2b:e7:02:29:f9:c4:91:da:</text>
+                                <text y="3126" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">3e:62:3e:8a:da:29:c2:91:bb:60:cf:d6:d2:f4:5b:a5:19:37:</text>
+                                <text y="3159" x="54.5" fill="hotpink" stroke="hotpink" fontWeight="bold">b1:ae:b8:7e</text>
                             </g>
                         </svg>
                     </div>
                 </>
                 : <></>}
-        </div>
+        </motion.div>
     );
 }
