@@ -1,5 +1,4 @@
 import React from 'react';
-import './LinuxConsole.css';
 import {motion} from "framer-motion";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
@@ -38,7 +37,7 @@ export default function FileArea({state}) {
             </motion.div>
             <motion.div animate={state.certificateIssuerImg ?? {}} className={classes.certWrapper}>
                 <motion.img animate={state.certificateIssuerImg ?? {}} className={classes.image} src={require("../../images/cert-template.png")}/>
-                issuer.crt
+                issuer.cer
             </motion.div>
             <motion.div animate={state.certificateIssuerPubKeyImg ?? {}} className={classes.certWrapper}>
                 <motion.img animate={state.certificateIssuerPubKeyImg ?? {}} className={classes.image} src={require("../../images/pem-template.png")}/>

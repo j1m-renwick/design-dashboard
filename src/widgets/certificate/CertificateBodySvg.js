@@ -117,7 +117,7 @@ export default function CertificateBodySvg() {
                 <text y="2565" x="295.5">52:D1:56:2B:02:21:00:92:58:82:AA:23:14:AA:B3:00:</text>
                 <text y="2598" x="295.5">9F:53:A4:7D:93:CE:37:7F:CB:2F:CA:6C:1E:56:3D:47:</text>
                 <text y="2631" x="295.5">16:AC:EB:F2:64:E0:87</text>
-                <text y="2664" x="28.5">Signature Algorithm: sha256WithRSAEncryption</text>
+                <text y="2664" x="28.5">Signature Algorithm: <tspan fontWeight="bold">sha256</tspan>WithRSAEncryption</text>
                 <text y="2697" x="54.5" fill="hotpink" stroke="hotpink"
                       fontWeight="bold">2f:de:47:43:cd:2d:0a:ed:6f:6d:3c:4b:39:0e:e6:05:17:74:
                 </text>

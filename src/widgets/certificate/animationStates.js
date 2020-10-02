@@ -9,11 +9,11 @@ export const states = [
         certificateView: {opacity: 0}
     },
     {
-        instructionText: "Drag the certificate icon from Google.com to the target directory to get the certificate file. <br/><b>In this example, the certificate is <b>DER-encrypted</b>.",
+        instructionText: "Drag the certificate icon from Google.com to the target directory to get the certificate file. <br/>In this example, the certificate is <b>DER-encrypted</b>.",
         certificateFileImg: {opacity: 1}
     },
     {
-        instructionText: "Open the certificate in plain text format, extract the hexadecimal signature and store it as a binary file.",
+        instructionText: "Open the certificate in plain text format, extract the hexadecimal signature and store it as a binary file.<br/>(In the example above, the signature is highlighted in pink.)",
         consoleText: "openssl x509 -in *.google.com.cer -inform DER -text -noout -certopt ca_default -certopt no_validity -certopt no_serial -certopt no_subject -certopt no_extensions -certopt no_signame | grep -v 'Signature Algorithm' | tr -d '[:space:]:' | xxd -r -p > cert-signature-hex.bin",
         certificateView: {opacity: 1}
     },
@@ -23,26 +23,26 @@ export const states = [
         certificateHexBinImg: {opacity: 1}
     },
     {
-        instructionText: "Open the certificate in plain text format, and extract the CA Issuer URL.",
+        instructionText: "Open the certificate in plain text format, and extract the CA Issuer URL.<br/>(In the example above, the URL is highlighted in green.)",
         consoleText: "openssl x509 -in *.google.com.cer -inform DER -text -noout | grep -o 'CA Issuers - URI:.*' | cut -d ':' -f2-",
         consoleOutputText: "http://pki.goog/gsr2/GTS1O1.crt"
     },
     {
-        instructionText: "Save the CA Issuer certificate using cURL. <br/>In this example, the certificate is <b>DER-encrypted</b>.",
-        consoleText: "curl http://pki.goog/gsr2/GTS1O1.crt > issuer.crt",
+        instructionText: "Save the CA Issuer certificate using this URL. <br/>In this example, the saved certificate is <b>DER-encrypted</b>.",
+        consoleText: "curl http://pki.goog/gsr2/GTS1O1.crt > issuer.cer",
     },
     {
-        instructionText: "Save the CA Issuer certificate using cURL. <br/>In this example, the certificate is <b>DER-encrypted</b>.",
-        consoleText: "curl http://pki.goog/gsr2/GTS1O1.crt > issuer.crt",
+        instructionText: "Save the CA Issuer certificate using this URL. <br/>In this example, the saved certificate is <b>DER-encrypted</b>.",
+        consoleText: "curl http://pki.goog/gsr2/GTS1O1.crt > issuer.cer",
         certificateIssuerImg: {opacity: 1}
     },
     {
         instructionText: "Obtain and save the CA Issuer's public key in <b>PEM</b> format.",
-        consoleText: "openssl x509 -in issuer.crt -inform DER -noout -pubkey > issuer-pubkey.pem"
+        consoleText: "openssl x509 -in issuer.cer -inform DER -noout -pubkey > issuer-pubkey.pem"
     },
     {
         instructionText: "Obtain and save the CA Issuer's public key in <b>PEM</b> format.",
-        consoleText: "openssl x509 -in issuer.crt -inform DER -noout -pubkey > issuer-pubkey.pem",
+        consoleText: "openssl x509 -in issuer.cer -inform DER -noout -pubkey > issuer-pubkey.pem",
         certificateIssuerPubKeyImg: {opacity: 1}
     },
     {
