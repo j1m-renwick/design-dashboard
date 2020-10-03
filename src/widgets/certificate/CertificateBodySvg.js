@@ -5,7 +5,7 @@ export default function CertificateBodySvg() {
     return (
         <svg width="700" height="3200" xmlns="http://www.w3.org/2000/svg">
             <g>
-                <rect fill="#fff" id="canvas_background" height="3202" width="702" y="-1" x="-1"/>
+                <rect fill="#fff" height="3202" width="702" y="-1" x="-1"/>
             </g>
             <g>
                 <text y="25" x="2.5">Certificate:</text>

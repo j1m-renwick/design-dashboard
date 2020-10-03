@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {motion, useAnimation} from "framer-motion";
 import './LinuxConsole.css';
 import { Container } from '@material-ui/core';
+import {makeStyles} from "@material-ui/core/styles";
 
 export default function LinuxConsole({consoleText, onClick, output}) {
 
@@ -318,10 +319,16 @@ export default function LinuxConsole({consoleText, onClick, output}) {
         caret4Control, caretEndPosition4, clipZoneWidth4, caretEndPosition5, clipZoneWidth5, textLines, text4Control,
         caret5Control, text5Control, textOutputControl, clipZoneWidthOutput])
 
+    const classes = makeStyles(theme => ({
+        container: {
+            flex: 1,
+            marginBottom: "10px"
+        }
+    }))();
 
 
     return (
-        <Container onClick={onClick} maxWidth="md" style={{flex: 1, marginBottom: "10px"}}>
+        <Container onClick={onClick} maxWidth="md" className={classes.container}>
             <svg viewBox="40 67 735 170" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="line1">

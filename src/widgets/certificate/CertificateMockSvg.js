@@ -4,6 +4,23 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 export default function CertificateMockSvg({mouseEnterCb, mouseMoveCb, mouseLeaveCb, showViewport, magnifierOffset, magnifierRef}) {
 
     const classes = makeStyles(theme => ({
+            container: {
+                position: "relative",
+                width: "200px",
+                height: "300px",
+                margin: "10px"
+            },
+            certificateContainer: {
+                height: "100%",
+                width: "100%",
+                position: "absolute",
+                top: 0,
+                left: 0
+            },
+            certificate: {
+                height: "100%",
+                width: "100%"
+            },
             magnifier: {
                 position: "absolute",
                 // left: `0px`,
@@ -18,9 +35,9 @@ export default function CertificateMockSvg({mouseEnterCb, mouseMoveCb, mouseLeav
     ))();
 
     return (
-        <div style={{position: "relative", width: "200px", height: "300px", margin: "10px"}}>
-            <div style={{height: "100%", width: "100%", position: "absolute", top: 0, left: 0}}>
-                <svg style={{height: "100%", width: "100%"}} onMouseEnter={e => mouseEnterCb(e)} onMouseMove={e => mouseMoveCb(e)}
+        <div className={classes.container}>
+            <div className={classes.certificateContainer}>
+                <svg className={classes.certificate} onMouseEnter={e => mouseEnterCb(e)} onMouseMove={e => mouseMoveCb(e)}
                      onMouseLeave={() => mouseLeaveCb()} viewBox="58 60 265 430"
                      xmlns="http://www.w3.org/2000/svg">
                     <g>

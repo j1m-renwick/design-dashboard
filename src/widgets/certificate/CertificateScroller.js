@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react';
 import {motion, transform} from "framer-motion";
 import CertificateMockSvg from './CertificateMockSvg';
 import CertificateViewport from './CertificateViewport';
+import {makeStyles} from "@material-ui/core/styles";
 
 export default function CertificateScroller({state}) {
 
@@ -35,9 +36,18 @@ export default function CertificateScroller({state}) {
         moveViewport(evt);
     }
 
+    const classes = makeStyles(theme => ({
+        container: {
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            opacity: 0
+        }
+    }))();
+
 
     return (
-        <motion.div style={{display: "flex", justifyContent: "center", alignItems: "center", opacity: 0}} animate={state}>
+        <motion.div className={classes.container} animate={state}>
             <CertificateMockSvg magnifierRef={magnifierRef} magnifierOffset={magnifierTopOffset} showViewport={showViewport} mouseEnterCb={startViewport} mouseMoveCb={moveViewport} mouseLeaveCb={() => setShowViewport(false)}/>
             {/*{showViewport ?*/}
             <CertificateViewport reference={viewport}/>

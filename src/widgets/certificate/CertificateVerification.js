@@ -7,6 +7,7 @@ import HashComparison from "./HashComparison";
 import {states} from "./animationStates";
 import Overlay from "./Overlay";
 import {motion} from "framer-motion";
+import {makeStyles} from "@material-ui/core/styles";
 
 
 export default function CertificateVerification() {
@@ -17,12 +18,33 @@ export default function CertificateVerification() {
         setKeyFrame((keyFrame + 1) % states.length);
     }
 
+    const classes = makeStyles(theme => ({
+        container: {
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            height: "100%"
+        },
+        matcherImg: {
+            position: "absolute",
+            height: "400px",
+            width: "400px",
+            zIndex: 4,
+            left: "calc(100% - 50% - 200px)",
+            display: "none"
+        },
+        scrollerContainer: {
+            margin: "10px"
+        }
+    }))();
+
     return (
-        <div onClick={() => clickAnimation()} style={{position: "relative", display: "flex", justifyContent: "center", flexDirection: "column", height: "100%"}}>
+        <div onClick={() => clickAnimation()} className={classes.container}>
             <Overlay state={states[keyFrame].modal??{}}/>
             {/*equals sign for the final comparison*/}
-            <motion.img animate={states[keyFrame].equalsSign??{}} style={{position: "absolute", height: "400px", width: "400px", zIndex: 4, left: "calc(100% - 50% - 200px)", display: "none"}} src={require("./../../images/equals.gif")}/>
-            <div style={{margin: "10px"}}>
+            <motion.img animate={states[keyFrame].equalsSign??{}} className={classes.matcherImg} src={require("./../../images/equals.gif")}/>
+            <div className={classes.scrollerContainer}>
                 <CertificateScroller state={states[keyFrame].certificateView??{}}/>
             </div>
             <HashComparison hashState={states[keyFrame].hashes??{}}/>
