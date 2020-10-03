@@ -37,7 +37,7 @@ export default function CertificateScroller({state}) {
 
 
     return (
-        <motion.div style={{display: "flex", justifyContent: "center", alignItems: "center"}} animate={state}>
+        <motion.div style={{display: "flex", justifyContent: "center", alignItems: "center", opacity: 0}} animate={state}>
             <CertificateMockSvg magnifierRef={magnifierRef} magnifierOffset={magnifierTopOffset} showViewport={showViewport} mouseEnterCb={startViewport} mouseMoveCb={moveViewport} mouseLeaveCb={() => setShowViewport(false)}/>
             {/*{showViewport ?*/}
             <CertificateViewport reference={viewport}/>
