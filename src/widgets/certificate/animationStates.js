@@ -131,7 +131,7 @@ export const states = [
         equalsSign: {
             display: "block",
             transition: {
-                delay: 2
+                delay: 2.25
             }
         }
     }
