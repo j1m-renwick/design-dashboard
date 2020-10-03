@@ -45,11 +45,11 @@ export default function FileArea({state}) {
             </motion.div>
             <motion.div animate={state.certificateHexBinImg ?? {}} className={classes.certWrapper}>
                 <motion.img animate={state.certificateHexBinImg ?? {}} className={classes.image} src={require("../../images/bin-template.png")}/>
-                hex-sig.bin
+                cert-sig.bin
             </motion.div>
             <motion.div animate={state.certificateHashedImg ?? {}} className={classes.certWrapper}>
                 <motion.img animate={state.certificateHashedImg ?? {}} className={classes.image} src={require("../../images/bin-template.png")}/>
-                certificate-hash.bin
+                google-cert.bin
             </motion.div>
         </Container>
     );
