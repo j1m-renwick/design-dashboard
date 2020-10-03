@@ -15,7 +15,6 @@ export default function Overlay({state}) {
                 width: "100%",
                 height: "100%",
                 backgroundColor: "rgba(255,255,255,0)",
-                // backdropFilter: "blur(2px)"
             }
         })
     )();

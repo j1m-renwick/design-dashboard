@@ -19,7 +19,11 @@ export const states = [
                 fontSize: "12pt"
             }
         },
-        modal: {display: "none"},
+        modal: {
+            display: "none",
+            backgroundColor: "rgba(255,255,255,0)",
+            backdropFilter: "none",
+        },
         equalsSign: {display: "none"}
     },
     {
@@ -102,7 +106,9 @@ export const states = [
             display: "block",
             backgroundColor: "rgba(255,255,255,0.8)",
             backdropFilter: "blur(2px)",
-            transition: {duration: 0.1}
+            transition: {
+                duration: 0.5
+            }
         },
         hashes: {
             signature: {
