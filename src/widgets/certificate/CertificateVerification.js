@@ -7,7 +7,7 @@ import HashComparison from "./HashComparison";
 import {states} from "./animationStates";
 import Overlay from "./Overlay";
 import {motion} from "framer-motion";
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles} from "@mui/styles";
 
 
 export default function CertificateVerification() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {motion} from "framer-motion";
-import Container from "@material-ui/core/Container";
-import {makeStyles} from "@material-ui/core/styles";
+import Container from "@mui/material/Container";
+import {makeStyles} from "@mui/styles";
 
 export default function FileArea({state}) {
 

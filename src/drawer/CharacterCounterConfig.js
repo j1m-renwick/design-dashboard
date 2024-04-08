@@ -1,9 +1,9 @@
 import React from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from "@material-ui/core/Checkbox";
-import TextField from "@material-ui/core/TextField";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from "@mui/material/Checkbox";
+import TextField from "@mui/material/TextField";
 import {useRecoilState} from "recoil";
 import {
     characterLimitEnabled as charLimitEnabledAtom,
@@ -11,11 +11,11 @@ import {
     stopOrHighlight as stopOrHighlightAtom
 } from "../atoms/characterCounterAtoms";
 import {useResetRecoilState} from "recoil/dist";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
 
 export default function CharacterCounterConfig() {
 

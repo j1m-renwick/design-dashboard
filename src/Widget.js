@@ -3,7 +3,7 @@ import './App.css';
 import 'fontsource-roboto';
 import CharacterCounter from "./widgets/CharacterCounter";
 import {drawerWidth} from "./drawer/StaticDrawer";
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles} from "@mui/styles";
 import GoldenRatio from "./widgets/GoldenRatio";
 import {useRecoilValue} from "recoil/dist";
 import {selectedWidget as selectedWidgetAtom} from "./atoms/DrawerAtoms";
@@ -28,8 +28,10 @@ export default function Widget() {
                 return <CharacterCounter/>
             case "Golden Ratio":
                 return <GoldenRatio/>
-            default:
+            case "Certificate Verification":
                 return <CertificateVerification/>
+            default:
+                return <></>
         }
     }
 

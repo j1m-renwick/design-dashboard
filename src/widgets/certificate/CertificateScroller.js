@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import {motion, transform} from "framer-motion";
 import CertificateMockSvg from './CertificateMockSvg';
 import CertificateViewport from './CertificateViewport';
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles} from "@mui/styles";
 
 export default function CertificateScroller({state}) {
 

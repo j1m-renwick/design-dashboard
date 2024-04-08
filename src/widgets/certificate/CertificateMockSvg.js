@@ -1,5 +1,5 @@
 import React from 'react';
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import {makeStyles} from "@mui/styles";
 
 export default function CertificateMockSvg({mouseEnterCb, mouseMoveCb, mouseLeaveCb, showViewport, magnifierOffset, magnifierRef}) {
 

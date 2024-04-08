@@ -1,12 +1,14 @@
 import React from 'react';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import BubbleChartOutlinedIcon from '@material-ui/icons/BubbleChartOutlined';
-import {makeStyles} from "@material-ui/core/styles";
-import Divider from "@material-ui/core/Divider";
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import BubbleChartOutlinedIcon from '@mui/icons-material/BubbleChartOutlined';
+import AbcOutlinedIcon from '@mui/icons-material/AbcOutlined';
+import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
+import {makeStyles} from "@mui/styles";
+import Divider from "@mui/material/Divider";
 import CharacterCounterConfig from "./CharacterCounterConfig";
 import {useRecoilState} from "recoil/dist";
 import {selectedWidget} from "../atoms/DrawerAtoms";
@@ -23,7 +25,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const list = ['Letter Count', 'Golden Ratio'];
+const list = [
+    {
+        title: 'Letter Count',
+        icon: <AbcOutlinedIcon/>
+    },
+    {
+        title: 'Golden Ratio',
+        icon: <BubbleChartOutlinedIcon/>
+    },
+    {
+        title: 'Certificate Verification',
+        icon: <FactCheckOutlinedIcon/>
+    }
+];
 
 export default function StaticDrawer() {
     const classes = useStyles();
@@ -43,12 +58,12 @@ export default function StaticDrawer() {
             variant="persistent" anchor="left"
             open={true} classes={{paper: classes.drawerPaper}}>
             <List>
-                {list.map(text => (
-                    <ListItem button key={text} onClick={() => setSelectedItem(text)}>
+                {list.map(item => (
+                    <ListItem button key={item.title} onClick={() => setSelectedItem(item.title)}>
                         <ListItemIcon>
-                            <BubbleChartOutlinedIcon/>
+                            {item.icon}
                         </ListItemIcon>
-                        <ListItemText primary={text}/>
+                        <ListItemText primary={item.title}/>
                     </ListItem>
                 ))}
             </List>

@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {motion, useAnimation} from "framer-motion";
 import './LinuxConsole.css';
-import { Container } from '@material-ui/core';
-import {makeStyles} from "@material-ui/core/styles";
+import { Container } from '@mui/material';
+import {makeStyles} from "@mui/styles";
 
 export default function LinuxConsole({consoleText, onClick, output}) {
 
